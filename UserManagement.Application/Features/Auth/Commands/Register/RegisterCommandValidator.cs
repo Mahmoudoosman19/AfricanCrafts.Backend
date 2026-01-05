@@ -1,0 +1,36 @@
+﻿using Common.Domain.Repositories;
+using UserManagement.Application.Features.Auth.Commands.Register.Abstract;
+using UserManagement.Application.Features.Auth.Commands.Register.Validators;
+
+namespace UserManagement.Application.Features.Auth.Commands.Register
+{
+    internal class RegisterCommandValidator : AbstractValidator<RegisterCommand>
+    {
+        public RegisterCommandValidator(CustomUserManager userManager)
+        {
+            RuleFor(x => x.Type)
+                .IsInEnum().WithMessage(Messages.IncorrectData);
+
+            When(x => x.Type == RegisterType.Admin, () =>
+            {
+                RuleFor(x => x.Admin)
+                .NotNull().WithMessage(Messages.EmptyField)
+                .SetValidator(new AdminRegisterDtoValidator(userManager)!);
+            });
+
+            When(x => x.Type == RegisterType.Customer, () =>
+            {
+                RuleFor(x => x.Customer)
+                .NotNull().WithMessage(Messages.EmptyField)
+                .SetValidator(new CustomerRegisterDtoValidator(userManager)!);
+            });
+
+            When(x => x.Type == RegisterType.Supervisor, () =>
+            {
+                RuleFor(x => x.Supervisor)
+                .NotNull().WithMessage(Messages.EmptyField)
+                .SetValidator(new SupervisorRegisterDtoValidator(userManager)!);
+            });
+        }
+    }
+}

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\UserManagement.Service\UserManagement.Presistence.csproj" />
   </ItemGroup>
 
