@@ -30,6 +30,7 @@ public static class IdentityExtension
         .AddEntityFrameworkStores<UserManagementDbContext>()
         .AddDefaultTokenProviders()
         .AddUserManager<CustomUserManager>();
+      
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
