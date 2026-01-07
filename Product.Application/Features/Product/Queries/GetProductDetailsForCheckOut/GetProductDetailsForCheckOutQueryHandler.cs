@@ -1,0 +1,45 @@
+﻿using Product.Application.Features.Product.Queries.GetProductDetails;
+using Product.Application.Specifications.Products;
+
+namespace Product.Application.Features.Product.Queries.GetProductDetailsForCheckOut
+{
+    class GetProductDetailsForCheckOutQueryHandler : IQueryHandler<GetProductDetailsForCheckOutQuery, GetProductDetailsForCheckOutQueryResponse>
+    {
+        private readonly IMapper _mapper;
+        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IGenericRepository<Domain.Entities.ProductExtension> _productExtensionRepo;
+
+        public GetProductDetailsForCheckOutQueryHandler(IMapper mapper,
+            IGenericRepository<Domain.Entities.Product> productRepo,
+            IGenericRepository<Domain.Entities.ProductExtension> productExtensionRepo)
+        {
+            _mapper = mapper;
+            _productRepo = productRepo;
+            _productExtensionRepo = productExtensionRepo;
+        }
+
+        public async Task<ResponseModel<GetProductDetailsForCheckOutQueryResponse>> Handle(GetProductDetailsForCheckOutQuery request, CancellationToken cancellationToken)
+        {
+            var product = _productRepo.GetEntityWithSpec(new GetProductDetailsByIdForCheckOutSpecification(request));
+
+            if (product == null)
+                return ResponseModel.Failure<GetProductDetailsForCheckOutQueryResponse>(Messages.NotFound);
+
+            var productExtensions = product.Extensions.Where(x => x.Id == request.extensionsId).FirstOrDefault();
+
+            if (productExtensions == null || productExtensions.Amount == 0)
+                return ResponseModel.Failure<GetProductDetailsForCheckOutQueryResponse>(Messages.ProductExtensionNotFound);
+
+            productExtensions.SetAmount(productExtensions.Amount - request.Quantity);
+
+            _productExtensionRepo.Update(productExtensions);
+            await _productExtensionRepo.SaveChangesAsync();
+
+            var response = _mapper.Map<GetProductDetailsForCheckOutQueryResponse>(product!);
+
+            return ResponseModel.Success(response, 1);
+        }
+    }
+}
+
+

@@ -9,8 +9,8 @@ namespace UserManagement.Persistence
     {
         public static IServiceCollection AddPersistenceStrapping(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(UserGenericRepository<>));
+            services.AddScoped<IUnitOfWork, UserUnitOfWork>();
             services.AddScoped<IAppleAuthService, AppleAuthService>();
 
             return services;

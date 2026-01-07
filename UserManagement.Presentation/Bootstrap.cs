@@ -1,0 +1,31 @@
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UserManagement.Application;
+using UserManagement.Infrastructure;
+using UserManagement.Persistence;
+using UserManagement.Presentation.Configurations;
+using UserManagement.Presentation.Extensions;
+
+namespace UserManagement.Presentation
+{
+    public static class Bootstrap
+    {
+        public static async Task<IServiceCollection> AddUserManagerStrapping(this IServiceCollection services,IConfiguration configuration)
+        {
+            services.AddDbConfig(configuration);
+            services.AddAppServicesDIConfig();
+
+            services.AddApplicationStrapping();
+            services.AddPersistenceStrapping();
+            services.AddInfrastructureStrapping();
+
+            services.AddIdentityServices(configuration);
+            return services;
+        }
+    }
+}

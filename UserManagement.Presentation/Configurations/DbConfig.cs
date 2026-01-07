@@ -11,7 +11,7 @@ namespace UserManagement.Presentation.Configurations
     {
         public static IServiceCollection AddDbConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("Database")!;
+            string connectionString = configuration.GetConnectionString("Default")!;
 
             services.AddSingleton<DBSavingChangesInterceptor>();
 

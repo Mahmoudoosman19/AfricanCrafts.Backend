@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Application.Features.Customer.Commands.AddRefundProofImg;
-using UserManagement.Application.Features.OrderUser.Queries.GetPendingCancellationOrders;
+//using UserManagement.Application.Features.OrderUser.Queries.GetPendingCancellationOrders;
 
 
 namespace UserManagement.Presentation.Controllers
@@ -15,12 +15,12 @@ namespace UserManagement.Presentation.Controllers
         {
         }
 
-        [HttpGet("Get-All-Pending-Cancellation-Orders")]
-        public async Task<IActionResult> GetAllPendingCancellationOrders([FromQuery] GetPendingCancellationOrdersQuery query, CancellationToken cancellationToken)
-        {
-            var response = await Sender.Send(query);
-            return HandleResult(response);
-        }
+        //[HttpGet("Get-All-Pending-Cancellation-Orders")]
+        //public async Task<IActionResult> GetAllPendingCancellationOrders([FromQuery] GetPendingCancellationOrdersQuery query, CancellationToken cancellationToken)
+        //{
+        //    var response = await Sender.Send(query);
+        //    return HandleResult(response);
+        //}
 
         [HttpPost("Add-Refund-Proof")]
         public async Task<IActionResult> AddRefundProof([FromForm] AddRefundProofImgCommand query)

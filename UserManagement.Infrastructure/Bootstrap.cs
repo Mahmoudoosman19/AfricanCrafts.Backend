@@ -32,7 +32,7 @@ public static class Bootstrap
             };
         });
 
-        await services.AddDBSeederExtension();
+         services.AddDBSeederExtension();
 
         return services;
     }
