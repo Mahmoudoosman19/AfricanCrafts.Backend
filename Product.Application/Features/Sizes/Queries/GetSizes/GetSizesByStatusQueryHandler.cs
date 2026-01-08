@@ -1,4 +1,5 @@
 ﻿using Product.Application.Specifications.Sizes;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sizes.Queries.GetSizes
@@ -6,8 +7,8 @@ namespace Product.Application.Features.Sizes.Queries.GetSizes
     internal class GetSizesByStatusQueryHandler : IQueryHandler<GetSizesByStatusQuery, List<GetSizesQueryResponse>>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Size> _sizeRepo;
-        public GetSizesByStatusQueryHandler(IMapper mapper, IGenericRepository<Size> sizeRepo)
+        private readonly IProductRepository<Size> _sizeRepo;
+        public GetSizesByStatusQueryHandler(IMapper mapper, IProductRepository<Size> sizeRepo)
         {
             _mapper = mapper;
             _sizeRepo = sizeRepo;

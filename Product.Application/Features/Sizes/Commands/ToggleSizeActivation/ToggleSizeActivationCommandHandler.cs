@@ -1,13 +1,14 @@
 ﻿
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sizes.Commands.ToggleSizeStop
 {
     internal class ToggleSizeActivationCommandHandler : ICommandHandler<ToggleSizeActivationCommand>
     {
-        private readonly IGenericRepository<Size> _sizeRepo;
+        private readonly IProductRepository<Size> _sizeRepo;
 
-        public ToggleSizeActivationCommandHandler(IGenericRepository<Size> sizeRepo)
+        public ToggleSizeActivationCommandHandler(IProductRepository<Size> sizeRepo)
         {
             _sizeRepo = sizeRepo;
         }

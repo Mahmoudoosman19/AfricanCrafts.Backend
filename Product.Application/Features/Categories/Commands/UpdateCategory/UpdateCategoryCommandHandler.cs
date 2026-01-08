@@ -1,14 +1,15 @@
 ﻿using ImageKitFileManager.Abstractions;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Commands.UpdateCategory
 {
     internal class UpdateCategoryCommandHandler : ICommandHandler<UpdateCategoryCommand>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
         private readonly IImageKitService _imageKitService;
 
-        public UpdateCategoryCommandHandler(IGenericRepository<Category> categoryRepo, IImageKitService imageKitService)
+        public UpdateCategoryCommandHandler(IProductRepository<Category> categoryRepo, IImageKitService imageKitService)
         {
             _categoryRepo = categoryRepo;
             _imageKitService = imageKitService;

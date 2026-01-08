@@ -1,13 +1,14 @@
 ﻿using Product.Application.Specifications.GenarceSpecificationToHomePage;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.HomePage.Query.Sliders
 {
     internal class GetSliderQueryHandler : IQueryHandler<GetSliderQuery, IEnumerable<GetSliderQueryResponse>>
     {
-        private readonly IGenericRepository<Domain.Entities.Slider> _sliderRepo;
+        private readonly IProductRepository<Domain.Entities.Slider> _sliderRepo;
         private readonly IMapper _mapper;
 
-        public GetSliderQueryHandler(IGenericRepository<Domain.Entities.Slider> sliderRepo, IMapper mapper)
+        public GetSliderQueryHandler(IProductRepository<Domain.Entities.Slider> sliderRepo, IMapper mapper)
         {
             _sliderRepo = sliderRepo;
             _mapper = mapper;

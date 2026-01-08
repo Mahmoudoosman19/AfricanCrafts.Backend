@@ -1,5 +1,6 @@
 ﻿using Common.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using Product.Domain.Abstraction;
 using Product.Persistence.Repositories;
 
 namespace Product.Persistence
@@ -8,8 +9,8 @@ namespace Product.Persistence
     {
         public static IServiceCollection AddPersistenceStrapping(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericRepository<>), typeof(ProductRepository<>));
-            services.AddScoped<IUnitOfWork, ProductUnitOfWork>();
+            services.AddScoped(typeof(IProductRepository<>), typeof(ProductRepository<>));
+            services.AddScoped<IProductUnitOfWork, ProductUnitOfWork>();
 
             return services;
         }

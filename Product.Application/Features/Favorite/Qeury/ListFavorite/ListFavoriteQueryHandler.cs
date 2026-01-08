@@ -1,16 +1,17 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Specifications.Favorite;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Favorite.Qeury.ListFavorite
 {
     public class ListFavoriteQueryHandler: IQueryHandler<ListFavoriteQeury, IReadOnlyList<ListFavoriteQueryResponse>>
     {
-        private readonly IGenericRepository<Domain.Entities.Favorite> _favRepo;
+        private readonly IProductRepository<Domain.Entities.Favorite> _favRepo;
         private readonly IMapper _mapper;
         private readonly ITokenExtractor _tokenExtractor;
 
 
-        public ListFavoriteQueryHandler(IMapper mapper, IGenericRepository<Domain.Entities.Favorite> favRepo, ITokenExtractor tokenExtractor)
+        public ListFavoriteQueryHandler(IMapper mapper, IProductRepository<Domain.Entities.Favorite> favRepo, ITokenExtractor tokenExtractor)
         {
 
             _mapper = mapper;

@@ -1,4 +1,5 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeTable.Commands.CreatesSizeTable
 {
@@ -6,13 +7,13 @@ namespace Product.Application.Features.SizeTable.Commands.CreatesSizeTable
     public class CreatesQuestionsCommandHandler
    : ICommandHandler<CreatesQuestionsCommand>
     {
-        private readonly IGenericRepository<SizeGroupQuestion> _questionsRepo;
-        private readonly IGenericRepository<SizeGroup>_sizeGroupRepo;
+        private readonly IProductRepository<SizeGroupQuestion> _questionsRepo;
+        private readonly IProductRepository<SizeGroup>_sizeGroupRepo;
         private readonly IMapper _mapper;
 
         public CreatesQuestionsCommandHandler(
-            IGenericRepository<SizeGroupQuestion> questionsRepo,
-            IGenericRepository<SizeGroup> sizeGroupRepo,
+            IProductRepository<SizeGroupQuestion> questionsRepo,
+            IProductRepository<SizeGroup> sizeGroupRepo,
             IMapper mapper)
         {
             _questionsRepo = questionsRepo;

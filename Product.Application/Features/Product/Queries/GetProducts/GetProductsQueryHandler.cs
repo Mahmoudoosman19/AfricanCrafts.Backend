@@ -1,17 +1,18 @@
 ﻿using IdentityHelper.Abstraction;
 using Mapster;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Queries.GetProducts
 {
     internal class GetProductsQueryHandler : IQueryHandler<GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery, IReadOnlyList<ProductQueryResponse>>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
         private readonly IMapper _mapper;
         private readonly ITokenExtractor _tokenExtractor;
 
         public GetProductsQueryHandler(
-            IGenericRepository<Domain.Entities.Product> productRepo,
+            IProductRepository<Domain.Entities.Product> productRepo,
             IMapper mapper,
             ITokenExtractor tokenExtractor)
         {

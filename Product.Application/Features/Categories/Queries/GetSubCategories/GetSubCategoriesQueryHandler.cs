@@ -1,5 +1,6 @@
 ﻿using Product.Application.Features.Categories.Queries.GetParentCategories;
 using Product.Application.Specifications.Categories;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetSubCategories;
@@ -8,10 +9,10 @@ internal class GetSubCategoriesQueryHandler :
     IQueryHandler<GetSubCategoriesQuery,
         IEnumerable<CategoryResponse>>
 {
-    private readonly IGenericRepository<Category> _categoryRepo;
+    private readonly IProductRepository<Category> _categoryRepo;
     private readonly IMapper _mapper;
 
-    public GetSubCategoriesQueryHandler(IGenericRepository<Category> categoryRepo
+    public GetSubCategoriesQueryHandler(IProductRepository<Category> categoryRepo
         , IMapper mapper)
     {
         _categoryRepo = categoryRepo;

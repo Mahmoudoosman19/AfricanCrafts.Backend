@@ -1,14 +1,15 @@
 ﻿using Product.Application.Specifications.GenarceSpecificationToHomePage;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.HomePage.Query.Categories
 {
     internal class GetCategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, IReadOnlyList<GetCategoriesQueryResponse>>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
         private readonly IMapper _mapper;
 
-        public GetCategoriesQueryHandler(IGenericRepository<Category> categoryRepo, IMapper mapper)
+        public GetCategoriesQueryHandler(IProductRepository<Category> categoryRepo, IMapper mapper)
         {
             _categoryRepo = categoryRepo;
             _mapper = mapper;

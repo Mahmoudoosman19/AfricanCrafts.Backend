@@ -1,4 +1,5 @@
 ﻿using Product.Application.SharedDTOs.SizeGroup;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Queries.GetSizeGroups
@@ -7,11 +8,11 @@ namespace Product.Application.Features.SizeGroups.Queries.GetSizeGroups
         IQueryHandler<GetSizeGroupsQuery, IEnumerable<SizeGroupLookupDto>>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<SizeGroup> _sizeGroupRepo;
+        private readonly IProductRepository<SizeGroup> _sizeGroupRepo;
 
         public GetSizeGroupsQueryHandler(
             IMapper mapper,
-            IGenericRepository<SizeGroup> sizeGroupRepo)
+            IProductRepository<SizeGroup> sizeGroupRepo)
         {
             _mapper = mapper;
             _sizeGroupRepo = sizeGroupRepo;

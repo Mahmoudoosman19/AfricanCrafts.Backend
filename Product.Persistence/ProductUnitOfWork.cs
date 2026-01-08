@@ -1,10 +1,11 @@
 ﻿using Common.Domain.Repositories;
+using Product.Domain.Abstraction;
 using Product.Persistence.Repositories;
 using System.Collections;
 
 namespace Product.Persistence;
 
-internal sealed class ProductUnitOfWork : IUnitOfWork
+internal sealed class ProductUnitOfWork : IProductUnitOfWork
 {
     private readonly ProductDbContext _context;
     private Hashtable _repositories;

@@ -1,12 +1,14 @@
-﻿namespace Product.Application.Features.Advertisement.Command.ManageAdvertisementActivation
+﻿using Product.Domain.Abstraction;
+
+namespace Product.Application.Features.Advertisement.Command.ManageAdvertisementActivation
 {
     public class ManageAdvertisementActivationCommandHandler : ICommandHandler<ManageAdvertisementActivationCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Advertisement> _advertisementRepository;
+        private readonly IProductRepository<Domain.Entities.Advertisement> _advertisementRepository;
         private readonly IMapper _IMapper;
 
 
-        public ManageAdvertisementActivationCommandHandler(IGenericRepository<Domain.Entities.Advertisement> repository, IMapper mapper)
+        public ManageAdvertisementActivationCommandHandler(IProductRepository<Domain.Entities.Advertisement> repository, IMapper mapper)
         {
             _advertisementRepository = repository;
             _IMapper = mapper;

@@ -2,6 +2,7 @@
 using Bus.Contracts.Models.Notifications;
 using Common.Application.Localization;
 using IdentityHelper.Abstraction;
+using Product.Domain.Abstraction;
 using System.Text;
 
 namespace Product.Application.Features.Product.Commands.AddProduct;
@@ -9,12 +10,12 @@ namespace Product.Application.Features.Product.Commands.AddProduct;
 internal class AddProductCommandHandler : ICommandHandler<AddProductCommand, string>
 {
     private readonly IMapper _mapper;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IProductUnitOfWork _unitOfWork;
     private readonly ILocalizer _localizer;
     private readonly ITokenExtractor _tokenExtractor;  
 
 
-    public AddProductCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, ILocalizer localizer, ITokenExtractor tokenExtractor)
+    public AddProductCommandHandler(IMapper mapper, IProductUnitOfWork unitOfWork, ILocalizer localizer, ITokenExtractor tokenExtractor)
     {
         _mapper = mapper;
         _unitOfWork = unitOfWork;

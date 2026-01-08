@@ -1,16 +1,17 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Features.Favorite.Command.ToggelFavorit;
 using Product.Application.Specifications.Favorite;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Favorite.Command.ToggelFavorite
 {
     public class ToggelFavoriteCommandHandler : ICommandHandler<ToggelFavoriteCommand>
     {
        
-        private readonly IGenericRepository<Domain.Entities.Favorite> _favoriteRepo;
+        private readonly IProductRepository<Domain.Entities.Favorite> _favoriteRepo;
         private readonly ITokenExtractor _tokenExtractor;
         public ToggelFavoriteCommandHandler(
-            IGenericRepository<Domain.Entities.Favorite> favoriteRepo,
+            IProductRepository<Domain.Entities.Favorite> favoriteRepo,
             ITokenExtractor tokenExtractor)
         {
            

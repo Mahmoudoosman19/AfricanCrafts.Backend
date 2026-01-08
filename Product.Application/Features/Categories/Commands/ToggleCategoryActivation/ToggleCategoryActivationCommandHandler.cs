@@ -1,12 +1,13 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Commands.ToggleCategoryActivation
 {
     public class ToggleCategoryActivationCommandHandler : ICommandHandler<ToggleCategoryActivationCommand>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
 
-        public ToggleCategoryActivationCommandHandler(IGenericRepository<Category> categoryRepo)
+        public ToggleCategoryActivationCommandHandler(IProductRepository<Category> categoryRepo)
         {
             _categoryRepo = categoryRepo;
         }

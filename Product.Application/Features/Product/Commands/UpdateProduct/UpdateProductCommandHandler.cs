@@ -1,15 +1,16 @@
 ﻿using Product.Application.Features.Product.Commands.UpdateProduct.UpdateProductHandlers;
 using Product.Application.Features.Product.Queries.GetProductDetails;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct
 {
     internal class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand, string>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateProductCommandHandler(IProductUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

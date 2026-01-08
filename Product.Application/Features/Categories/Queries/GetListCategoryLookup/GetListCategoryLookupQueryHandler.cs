@@ -1,14 +1,15 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetListCategoryLookup
 {
     internal class GetListCategoryLookupQueryHandler : IQueryHandler<GetListCategoryLookupQuery, IReadOnlyList<GetCategorylookupRespone>>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
         private readonly IMapper _mapper;
 
         public GetListCategoryLookupQueryHandler(
-            IGenericRepository<Category> categoryRepo, IMapper mapper)
+            IProductRepository<Category> categoryRepo, IMapper mapper)
         {
             _categoryRepo = categoryRepo;
             _mapper = mapper;

@@ -1,6 +1,7 @@
 ﻿
 
 using ImageKitFileManager.Abstractions;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Commands.AddCategory
@@ -8,9 +9,9 @@ namespace Product.Application.Features.Categories.Commands.AddCategory
     internal sealed class AddCategoryCommandHandler : ICommandHandler<AddCategoryCommand>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
         private readonly IImageKitService _imageKitService;
-        public AddCategoryCommandHandler(IGenericRepository<Category> categoryRepo,
+        public AddCategoryCommandHandler(IProductRepository<Category> categoryRepo,
             IMapper mapper,
             IImageKitService imageKitService)
         {

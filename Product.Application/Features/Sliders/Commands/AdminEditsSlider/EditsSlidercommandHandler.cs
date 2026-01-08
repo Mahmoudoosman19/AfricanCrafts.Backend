@@ -1,4 +1,5 @@
 ﻿using ImageKitFileManager.Abstractions;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sliders.Commands.AdminEditsSlider
@@ -6,10 +7,10 @@ namespace Product.Application.Features.Sliders.Commands.AdminEditsSlider
     internal class EditsSlidercommandHandler:ICommandHandler<EditsSlidercommand>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Domain.Entities.Slider> _sliderRepo;
+        private readonly IProductRepository<Domain.Entities.Slider> _sliderRepo;
         private readonly IImageKitService _imageKitService;
 
-        public EditsSlidercommandHandler(IGenericRepository<Domain.Entities.Slider> sliderRepo, IMapper mapper, IImageKitService imageKitService)
+        public EditsSlidercommandHandler(IProductRepository<Domain.Entities.Slider> sliderRepo, IMapper mapper, IImageKitService imageKitService)
         {
             _sliderRepo = sliderRepo;
             _mapper = mapper;

@@ -1,13 +1,14 @@
 ﻿using Product.Application.Abstractions;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct.UpdateProductHandlers
 {
     internal class UpdateProductDetailsHandler : ResponsibilityHandler<UpdateProductInput>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateProductDetailsHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateProductDetailsHandler(IProductUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

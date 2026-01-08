@@ -1,9 +1,11 @@
-﻿namespace Product.Application.Features.Product.Commands.SupervisorProductAdmission
+﻿using Product.Domain.Abstraction;
+
+namespace Product.Application.Features.Product.Commands.SupervisorProductAdmission
 {
     internal class SupervisorProductAdmissionHandler : ICommandHandler<SupervisorProductAdmissionCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
-        public SupervisorProductAdmissionHandler(IGenericRepository<Domain.Entities.Product> productRepo)
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
+        public SupervisorProductAdmissionHandler(IProductRepository<Domain.Entities.Product> productRepo)
         {
             _productRepo = productRepo;
         }

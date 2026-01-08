@@ -1,15 +1,16 @@
 ﻿using ImageKitFileManager.Abstractions;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Advertisements.Command.AddAdvertisement
 {
     internal class AdvertisementCommandHandler : ICommandHandler<AddAdvertisementCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Advertisement> _advertisementRepository;
+        private readonly IProductRepository<Domain.Entities.Advertisement> _advertisementRepository;
         private readonly IMapper _IMapper;
         private readonly IImageKitService _imageKitService;
 
 
-        public AdvertisementCommandHandler(IGenericRepository<Domain.Entities.Advertisement> repository, IMapper mapper, IImageKitService imageKitService)
+        public AdvertisementCommandHandler(IProductRepository<Domain.Entities.Advertisement> repository, IMapper mapper, IImageKitService imageKitService)
         {
             _advertisementRepository = repository;
             _IMapper = mapper;

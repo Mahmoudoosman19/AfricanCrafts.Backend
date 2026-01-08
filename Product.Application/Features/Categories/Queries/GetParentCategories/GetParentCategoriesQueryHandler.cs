@@ -1,15 +1,16 @@
 ﻿using Product.Application.Specifications.Categories;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Categories.Queries.GetParentCategories;
 
 internal class GetParentCategoriesQueryHandler :
     IQueryHandler<GetParentCategoriesQuery, IEnumerable<CategoryResponse>>
 {
-    private readonly IGenericRepository<Domain.Entities.Category> _categoryRepo;
+    private readonly IProductRepository<Domain.Entities.Category> _categoryRepo;
     private readonly IMapper _mapper;
 
     public GetParentCategoriesQueryHandler(
-        IGenericRepository<Domain.Entities.Category> categoryRepo
+        IProductRepository<Domain.Entities.Category> categoryRepo
         , IMapper mapper)
     {
         _categoryRepo = categoryRepo;

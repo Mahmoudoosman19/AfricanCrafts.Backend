@@ -4,15 +4,16 @@ using Common.Persistence.Specifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Persistence.Repositories
 {
-    internal class UserGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    internal class UserRepository<TEntity> : IUserRepository<TEntity> where TEntity : class
     {
         private readonly UserManagementDbContext _context;
         protected DbSet<TEntity> _entity;
 
-        public UserGenericRepository(UserManagementDbContext context)
+        public UserRepository(UserManagementDbContext context)
         {
             _context = context;
             _entity = context.Set<TEntity>();

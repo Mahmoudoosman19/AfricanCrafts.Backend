@@ -1,16 +1,17 @@
 ﻿using Product.Application.Features.Categories.Queries.GetCategroyById;
 using Product.Application.Specifications.Categories;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetListCategory
 {
     internal class GetCategoryByStatusWithFilterSearchQueryHandler : IQueryHandler<GetCategoryByStatusWithFilterSearchQuery, IReadOnlyList<GetCategoryDetailsResponse>>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
         private readonly IMapper _mapper;
 
         public GetCategoryByStatusWithFilterSearchQueryHandler(
-            IGenericRepository<Category> categoryRepo, IMapper mapper)
+            IProductRepository<Category> categoryRepo, IMapper mapper)
         {
             _categoryRepo = categoryRepo;
             _mapper = mapper;

@@ -1,5 +1,6 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Features.Product.Commands.SuperVisorAddProduct;
+using Product.Domain.Abstraction;
 using Product.Domain.Enums;
 using System.Text;
 
@@ -8,10 +9,10 @@ namespace Product.Application.Features.Product.Commands.AddProduct
     internal class SuperVisorAddProductCommandHandler : ICommandHandler<SuperVisorAddProductCommand, string>
     {
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
         private readonly ITokenExtractor _userManager;
 
-        public SuperVisorAddProductCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, ITokenExtractor userManager)
+        public SuperVisorAddProductCommandHandler(IMapper mapper, IProductUnitOfWork unitOfWork, ITokenExtractor userManager)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

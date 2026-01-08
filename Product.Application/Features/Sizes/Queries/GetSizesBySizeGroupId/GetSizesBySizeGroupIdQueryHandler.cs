@@ -1,4 +1,5 @@
 ﻿using Product.Application.Specifications.Sizes;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sizes.Queries.GetSizesBySizeGroupId
@@ -6,11 +7,11 @@ namespace Product.Application.Features.Sizes.Queries.GetSizesBySizeGroupId
     internal class GetSizesBySizeGroupIdQueryHandler : IQueryHandler<GetSizesBySizeGroupIdQuery, IReadOnlyList<GetSizesResponse>>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Size> _sizeRepo;
+        private readonly IProductRepository<Size> _sizeRepo;
 
         public GetSizesBySizeGroupIdQueryHandler(
             IMapper mapper,
-            IGenericRepository<Size> sizeRepo)
+            IProductRepository<Size> sizeRepo)
         {
             _mapper = mapper;
             _sizeRepo = sizeRepo;
