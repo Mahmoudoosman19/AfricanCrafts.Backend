@@ -10,7 +10,7 @@ namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
         private readonly ITokenExtractor _userManager;
 
         public UpdateProductCommandValidator(IGenericRepository<Domain.Entities.Product> productRepo, IGenericRepository<ProductImage> productImageRepo, IGenericRepository<ProductExtension> productExtensionRepo,
-            IGenericRepository<Category> categoryRepo, IGenericRepository<Point> pointRepo, IGenericRepository<Domain.Entities.Color> colorRepo, IGenericRepository<Size> sizeRepo, ITokenExtractor userManager)
+            IGenericRepository<Category> categoryRepo, IGenericRepository<Domain.Entities.Color> colorRepo, IGenericRepository<Size> sizeRepo, ITokenExtractor userManager)
         {
             _productRepo = productRepo;
             _userManager = userManager;
@@ -46,9 +46,7 @@ namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
                 .NotEmpty().WithMessage(Messages.EmptyField)
                 .EntityExist(categoryRepo).WithMessage(Messages.NotFound);
 
-            RuleFor(product => product.PointsId.Value)
-                .EntityExist(pointRepo).When(product => product.PointsId.HasValue).WithMessage(Messages.NotFound);
-
+          
             RuleFor(product => product.Images)
                 .ForEachSetValidator(new UpdateProductImageDTOValidator(productImageRepo, colorRepo))
                 .DependentRules(() =>
@@ -85,7 +83,6 @@ namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
             (p.NameAr == product.NameAr || p.NameEn == product.NameEn)
             && p.CategoryId == product.CategoryId
             && p.Id != product.Id
-            && p.VendorId == _userManager.GetUserId()
             , cancellationToken));
     }
 }

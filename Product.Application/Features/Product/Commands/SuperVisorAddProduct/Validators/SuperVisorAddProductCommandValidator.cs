@@ -12,7 +12,6 @@ internal class SuperVisorAddProductCommandValidator : AbstractValidator<SuperVis
     public SuperVisorAddProductCommandValidator(
         IGenericRepository<Domain.Entities.Product> productRepo,
         IGenericRepository<Category> categoryRepo,
-        IGenericRepository<Point> pointRepo,
         IGenericRepository<Domain.Entities.Color> colorRepo,
         IGenericRepository<Size> sizeRepo,
         IUserManagement userManager)
@@ -56,9 +55,7 @@ internal class SuperVisorAddProductCommandValidator : AbstractValidator<SuperVis
             .NotEmpty().WithMessage(Messages.EmptyField)
             .EntityExist(categoryRepo).WithMessage(Messages.NotFound);
 
-        RuleFor(product => product.PointsId!.Value)
-            .EntityExist(pointRepo).When(product => product.PointsId.HasValue).WithMessage(Messages.NotFound);
-
+       
         RuleFor(product => product.Images)
             .ListMustContainMoreThan().WithMessage(Messages.EmptyField)
             .ForEachSetValidator(new AddProductImageDTOValidator(colorRepo));
@@ -73,7 +70,6 @@ internal class SuperVisorAddProductCommandValidator : AbstractValidator<SuperVis
         var result = !(await _productRepo.IsExistAsync(p =>
                 (p.NameAr == product.NameAr || p.NameEn == product.NameEn)
                 && p.CategoryId == product.CategoryId
-                && p.VendorId == product.VendorId
             , cancellationToken));
         return result;
     }
@@ -82,7 +78,7 @@ internal class SuperVisorAddProductCommandValidator : AbstractValidator<SuperVis
         if (product.ProductCode == null)
             return true;
 
-        var result = _productRepo.GetEntityWithSpec(new GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageSpecification(product.ProductCode));
+        var result = _productRepo.GetEntityWithSpec(new GetProductsByStatusAndProductCodeAndNameWithImageSpecification(product.ProductCode));
         if (result == null)
             return false;
         return true;

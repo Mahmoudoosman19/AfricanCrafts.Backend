@@ -3,9 +3,9 @@ using Product.Domain.Enums;
 
 namespace Product.Application.Specifications.Products
 {
-    internal sealed class GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageSpecification : Specification<Domain.Entities.Product>
+    internal sealed class GetProductsByStatusAndProductCodeAndNameWithImageSpecification : Specification<Domain.Entities.Product>
     {
-        public GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageSpecification(GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery query,
+        public GetProductsByStatusAndProductCodeAndNameWithImageSpecification(GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery query,
             Guid userId, string role)
         {
             ApplyPaging(query.PageSize, query.PageIndex);
@@ -22,15 +22,14 @@ namespace Product.Application.Specifications.Products
             if (query.Status!=null)
                 AddCriteria(x => x.Status==(ProductStatus)query.Status);
 
-            if (role == "Vendor")
-                AddCriteria(x => x.VendorId == userId);
+         
 
             AddInclude(new List<string>
             {
                 nameof(Domain.Entities.Product.Images),
             });
         }
-        public GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageSpecification(string ProductCode)
+        public GetProductsByStatusAndProductCodeAndNameWithImageSpecification(string ProductCode)
         {
             AddCriteria(x => x.ProductCode == ProductCode);
         }

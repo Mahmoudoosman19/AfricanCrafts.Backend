@@ -19,20 +19,8 @@ internal class ToggleProductActivationCommandValidator
             .Cascade(CascadeMode.Stop)
             .NotNull()
             .EntityExist(productRepo).WithMessage(Messages.NotFound)
-            .MustAsync(VerifyUser)
             .WithMessage(Messages.IncorrectData);
     }
 
-    private async Task<bool> VerifyUser(Guid productId, CancellationToken cancellationToken)
-    {
-        var userRole = _currentUser.GetUserRole();
-        if (userRole != UserRoles.Vendor)
-            return true;
-        
-        var userId = _currentUser.GetUserId();
-        var owner = await _productRepo.IsExistAsync
-            (p =>  p.Id == productId && p.VendorId == userId, cancellationToken);
-
-        return owner;
-    }
+    
 }

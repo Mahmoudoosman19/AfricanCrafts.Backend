@@ -12,10 +12,8 @@ namespace Product.Application.Specifications.Products
             AddInclude(new List<string>
             {
                 nameof(Domain.Entities.Product.Category),
-                nameof(Domain.Entities.Product.Points),
                 nameof(Domain.Entities.Product.Images),
                 nameof(Domain.Entities.Product.Extensions),
-                nameof(Domain.Entities.Product.Comments),
                 $"{nameof(Domain.Entities.Product.Extensions)}.{nameof(ProductExtension.Size)}",
             });
 

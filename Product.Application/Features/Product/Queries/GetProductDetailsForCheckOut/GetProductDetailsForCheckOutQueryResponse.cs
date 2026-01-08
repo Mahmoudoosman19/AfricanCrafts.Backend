@@ -18,7 +18,6 @@ namespace Product.Application.Features.Product.Queries.GetProductDetailsForCheck
         public Guid VendorId { get; init; }
         public string? ProductCode { get; init; }
         public CategoryResponse Category { get; init; } = null!;
-        public PointResponse? Points { get; init; }
         public List<DetailedProductImageResponse> Images { get; init; } = new();
         public List< ProductExtensionResponse> Extensions { get; init; } = new();
         public DateTime CreatedOnUtc { get; init; }

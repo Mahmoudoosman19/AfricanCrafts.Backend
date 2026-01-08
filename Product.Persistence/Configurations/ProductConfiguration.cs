@@ -25,9 +25,7 @@ namespace Product.Persistence.Configurations
                    .HasForeignKey(p => p.CategoryId);
 
 
-            builder.HasOne(p => p.Points)
-                   .WithMany()
-                   .HasForeignKey(p => p.PointsId);
+         
 
 
         }

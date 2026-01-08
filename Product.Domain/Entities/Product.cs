@@ -12,7 +12,6 @@ namespace Product.Domain.Entities
     {
         private List<ProductImage> _productImages = [];
         private List<ProductExtension> _productExtensions = [];
-        private List<ProductComment> _productComments = [];
 
         public string NameAr { get; private set; } = null!;
         public string NameEn { get; private set; } = null!;
@@ -24,16 +23,10 @@ namespace Product.Domain.Entities
         [ForeignKey(nameof(CategoryId))]
         public virtual Category? Category { get; private set; }
         public bool IsActive { get; private set; } = false;
-        public Guid CreatedBy { get; private set; }
-        public Guid VendorId { get; private set; }
-        public Guid? PointsId { get; private set; }
-        [ForeignKey(nameof(PointsId))]
-        public virtual Point? Points { get; private set; }
 
         public ProductStatus Status { get; private set; } = ProductStatus.InReview;
         public ICollection<ProductImage> Images => _productImages;
         public ICollection<ProductExtension> Extensions => _productExtensions;
-        public ICollection<ProductComment> Comments => _productComments;
         public Guid ImagesFolderName { get; private set; }
         [Range(0.0, 5.0)]
         public double Rate { get; private set; } = 2.5;
@@ -82,16 +75,7 @@ namespace Product.Domain.Entities
             }
         }
 
-        public void SetCreatorAndOwnerInfo(Guid createdBy, Guid vendorId)
-        {
-            CreatedBy = createdBy;
-            VendorId = vendorId;
-        }
 
-        public void SetPoints(Guid? pointsId)
-        {
-            PointsId = pointsId;
-        }
 
         public void SetImagesFolderName(Guid name)
         {
@@ -112,15 +96,7 @@ namespace Product.Domain.Entities
             _productImages.AddRange(images);
         }
 
-        public void AddComment(ProductComment comment)
-        {
-            _productComments.Add(comment);
-        }
-
-        public void AddRangeComments(List<ProductComment> comments)
-        {
-            _productComments.AddRange(comments);
-        }
+        
 
         public void RemoveImage(ProductImage image)
         {

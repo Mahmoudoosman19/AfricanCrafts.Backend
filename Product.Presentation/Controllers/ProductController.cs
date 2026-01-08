@@ -5,16 +5,12 @@ using Product.Application.Features.Product.Commands.AddProduct;
 using Product.Application.Features.Product.Commands.ChangeProductActivation;
 using Product.Application.Features.Product.Commands.RestockProduct;
 using Product.Application.Features.Product.Commands.SuperVisorAddProduct;
-using Product.Application.Features.Product.Commands.SupervisorDeletesComment;
 using Product.Application.Features.Product.Commands.SupervisorProductAdmission;
 using Product.Application.Features.Product.Commands.SupervisorRejectProduct;
 using Product.Application.Features.Product.Commands.UpdateProduct;
-using Product.Application.Features.Product.Queries.GetCommentsOnRejectedProducts;
-using Product.Application.Features.Product.Queries.GetProductByVendorId;
 using Product.Application.Features.Product.Queries.GetProductDetails;
 using Product.Application.Features.Product.Queries.GetProductDetailsCustomer;
 using Product.Application.Features.Product.Queries.GetProducts;
-using Product.Application.Features.Product.Queries.GetVendorProducts.GetVendorProductTopFive;
 using Product.Application.Features.Product.Queries.ProductStatisticsQuery;
 
 
@@ -101,19 +97,8 @@ namespace Product.Presentation.Controllers
 
             return HandleResult(result);
         }
-        [HttpGet("get-comments-products")]
-        public async Task<IActionResult> Get([FromQuery] GetCommentsOnRejectedProductsByProductIdQuery query, CancellationToken cancellationToken)
-        {
-            var result = await Sender.Send(query, cancellationToken);
-
-            return HandleResult(result!);
-        }
-        [HttpDelete("delete-comment-product")]
-        public async Task<IActionResult> DeleteComment([FromQuery] DeletesCommentCommand deletecomment, CancellationToken cancellationToken)
-        {
-            var response = await Sender.Send(deletecomment, cancellationToken);
-            return HandleResult(response);
-        }
+       
+      
         [HttpGet("product-customer-details")]
         public async Task<IActionResult> ProductDetails([FromQuery] CustomerGetProductDetailsByIdQuery query)
         {
@@ -126,18 +111,8 @@ namespace Product.Presentation.Controllers
             var respons = await Sender.Send(query);
             return Ok(respons);
         }
-        [HttpGet("get-product-by-vendor")]
-        public async Task<IActionResult> GetProductByVendorID([FromQuery] GetProductByVendorIdWithImageQuery query)
-        {
-            var respons = await Sender.Send(query);
-            return Ok(respons);
-        }
-        [HttpGet("get-vendor-top-product")]
-        public async Task<IActionResult> GetVendorTopProduct ([FromQuery] GetVendorProductTopFiveQuery query)
-        {
-            var respons = await Sender.Send(query);
-            return Ok(respons);
-        }
+       
+        
     }
 }
     
