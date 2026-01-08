@@ -22,9 +22,7 @@ public class SupervisorRejectProductCommandHandler : ICommandHandler<SupervisorR
 
         product!.SetActivation(false);
         product.SetStatus(Domain.Enums.ProductStatus.Rejected);
-        var userId = _tokenExtractor.GetUserId();
-        var comment = new ProductComment(request.Comment, userId);
-        product.AddComment(comment);
+        
 
         await _uow.CompleteAsync(cancellationToken);
 

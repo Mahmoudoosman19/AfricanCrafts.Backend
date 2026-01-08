@@ -1,7 +1,6 @@
 ﻿
 
 using Product.Application.Specifications.Products;
-using Product.Application.Specifications.Reviews;
 
 namespace Product.Application.Features.Product.Queries.GetProductDetails
 {
@@ -9,14 +8,12 @@ namespace Product.Application.Features.Product.Queries.GetProductDetails
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
-        private readonly IGenericRepository<Domain.Entities.Review> _reviewRepo;
 
         public GetProductDetailsByIdWithRelationsProductQueryHandler(IMapper mapper,
-            IGenericRepository<Domain.Entities.Product> productRepo, IGenericRepository<Domain.Entities.Review> reviewRepo)
+            IGenericRepository<Domain.Entities.Product> productRepo)
         {
             _mapper = mapper;
             _productRepo = productRepo;
-            _reviewRepo = reviewRepo;
         }
 
         public Task<ResponseModel<ProductDetailsQueryResponse>> Handle(GetProductDetailsByIdWithRelationsProductQuery request, CancellationToken cancellationToken)
@@ -24,8 +21,7 @@ namespace Product.Application.Features.Product.Queries.GetProductDetails
             var product = _productRepo.GetEntityWithSpec(new GetProductDetailsByIdWithRelationsProductSpecification(request));
 
             var response = _mapper.Map<ProductDetailsQueryResponse>(product!);
-            var reviewCount = _reviewRepo.GetWithSpec(new GetReviewByProductIdSpecification(request.Id)).count;
-            response.NumberOfRatings = reviewCount;
+           
 
             return Task.FromResult(ResponseModel.Success(response, 1));
         }

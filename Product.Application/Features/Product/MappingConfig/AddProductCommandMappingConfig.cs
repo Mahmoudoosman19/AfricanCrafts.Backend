@@ -13,11 +13,9 @@ namespace Product.Application.Features.Product.MappingConfig
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<AddProductCommand, Domain.Entities.Product>()
-                .AfterMapping((dest, src) => src.SetCreatorAndOwnerInfo(GetCurrentUserId(), GetCurrentUserId()))
                 .AfterMapping(MapLists);
 
             config.NewConfig<SuperVisorAddProductCommand, Domain.Entities.Product>()
-                .AfterMapping((dest, src) => src.SetCreatorAndOwnerInfo(GetCurrentUserId(), dest.VendorId))
                 .AfterMapping(MapListsSupervisor);
 
             config.NewConfig<AddProductImageDTO, ProductImage>()
