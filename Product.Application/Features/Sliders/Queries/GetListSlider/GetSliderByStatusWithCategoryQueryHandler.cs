@@ -1,14 +1,15 @@
 ﻿using Product.Application.Specifications.slider;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Sliders.Queries.GetListSlider
 {
     public class GetSliderByStatusWithCategoryQueryHandler:IQueryHandler<GetSliderByStatusWithCategoryQuery,IEnumerable<SliderResponse>>
     {
-        private readonly IGenericRepository<Domain.Entities.Slider> _sliderRepo;
+        private readonly IProductRepository<Domain.Entities.Slider> _sliderRepo;
         private readonly IMapper _mapper;
 
 
-        public GetSliderByStatusWithCategoryQueryHandler(IGenericRepository<Domain.Entities.Slider> repository, IMapper mapper)
+        public GetSliderByStatusWithCategoryQueryHandler(IProductRepository<Domain.Entities.Slider> repository, IMapper mapper)
         {
             _sliderRepo = repository;
             _mapper = mapper;

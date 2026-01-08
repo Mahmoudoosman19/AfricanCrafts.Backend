@@ -1,15 +1,16 @@
 ﻿using Product.Application.Features.Categories.Queries.GetCategroyById;
 using Product.Application.Specifications.Categories;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetOneCategroy
 {
     internal class GetCategoryByIdWithSizeGroupAndParentCategoryQueryHandler : IQueryHandler<GetCategoryByIdWithSizeGroupAndParentCategoryQuery, GetCategoryDetailsResponse>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IProductRepository<Category> _categoryRepo;
         private readonly IMapper _mapper;
 
-        public GetCategoryByIdWithSizeGroupAndParentCategoryQueryHandler(IGenericRepository<Category> categoryRepo, IMapper mapper)
+        public GetCategoryByIdWithSizeGroupAndParentCategoryQueryHandler(IProductRepository<Category> categoryRepo, IMapper mapper)
         {
             _categoryRepo = categoryRepo;
             _mapper = mapper;

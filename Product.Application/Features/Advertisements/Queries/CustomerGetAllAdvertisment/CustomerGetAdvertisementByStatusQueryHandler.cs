@@ -1,14 +1,15 @@
 ﻿using Product.Application.Specifications.Advertisement;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Advertisements.Queries.CustomerGetAllAdvertisment
 {
     public class CustomerGetAdvertisementByStatusQueryHandler : IQueryHandler<CustomerGetAdvertisementByStatusQuery, IEnumerable<CustomerAdvertisementsQueryResponse>>
     {
-        private readonly IGenericRepository<Domain.Entities.Advertisement> _advertisementRepo;
+        private readonly IProductRepository<Domain.Entities.Advertisement> _advertisementRepo;
         private readonly IMapper _mapper;
 
         public CustomerGetAdvertisementByStatusQueryHandler(
-            IGenericRepository<Domain.Entities.Advertisement> advertisementRepo,
+            IProductRepository<Domain.Entities.Advertisement> advertisementRepo,
             IMapper mapper)
         {
             _advertisementRepo = advertisementRepo;

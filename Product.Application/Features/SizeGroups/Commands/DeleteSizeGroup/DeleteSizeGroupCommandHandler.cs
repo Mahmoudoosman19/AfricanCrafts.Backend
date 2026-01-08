@@ -1,14 +1,15 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.TemplateSizes.Commands.DeleteSizeGroup
 {
     internal class DeleteSizeGroupCommandHandler : ICommandHandler<DeleteSizeGroupCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
 
 
         public DeleteSizeGroupCommandHandler(
-            IUnitOfWork unitOfWork)
+            IProductUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

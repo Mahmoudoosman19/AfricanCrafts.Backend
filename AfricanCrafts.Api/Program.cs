@@ -23,8 +23,10 @@ namespace AfricanCrafts.Api
 
             // Product Module Register
             builder.Services.AddProductStrapping(builder.Configuration);
+            // Usermanagement Module Register 
             builder.Services.AddUserManagerStrapping(builder.Configuration);
 
+            
 
             builder.Services.AddImageKitFileManagerConfig(builder.Configuration);
             builder.Services.AddIdentityHelper();
@@ -36,8 +38,11 @@ namespace AfricanCrafts.Api
             
 
 
+            // Add Controllers
+            builder.Services.AddControllers()
+                .AddApplicationPart(Product.Presentation.AssemblyReference.Assembly)
+                .AddApplicationPart(UserManagement.Presentation.AssemblyReference.Assembly);
 
-            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

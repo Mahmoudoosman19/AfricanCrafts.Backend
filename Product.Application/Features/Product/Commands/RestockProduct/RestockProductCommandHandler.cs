@@ -1,11 +1,12 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.RestockProduct
 {
     public class RestockProductCommandHandler : ICommandHandler<RestockProductCommand>
     {
-        private readonly IGenericRepository<ProductExtension> _productextensionRepo;
-        public RestockProductCommandHandler(IGenericRepository<ProductExtension> productextensionRepo)
+        private readonly IProductRepository<ProductExtension> _productextensionRepo;
+        public RestockProductCommandHandler(IProductRepository<ProductExtension> productextensionRepo)
         {
             _productextensionRepo = productextensionRepo;
         }

@@ -1,17 +1,18 @@
 ﻿using Product.Application.Features.Product.Queries.GetProductDetails;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Queries.GetProductDetailsForCheckOut
 {
     class GetProductDetailsForCheckOutQueryHandler : IQueryHandler<GetProductDetailsForCheckOutQuery, GetProductDetailsForCheckOutQueryResponse>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
-        private readonly IGenericRepository<Domain.Entities.ProductExtension> _productExtensionRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.ProductExtension> _productExtensionRepo;
 
         public GetProductDetailsForCheckOutQueryHandler(IMapper mapper,
-            IGenericRepository<Domain.Entities.Product> productRepo,
-            IGenericRepository<Domain.Entities.ProductExtension> productExtensionRepo)
+            IProductRepository<Domain.Entities.Product> productRepo,
+            IProductRepository<Domain.Entities.ProductExtension> productExtensionRepo)
         {
             _mapper = mapper;
             _productRepo = productRepo;

@@ -1,15 +1,16 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Commands.CreateSizeGroup
 {
     internal class CreateSizeGroupCommandHandler
         : ICommandHandler<CreateSizeGroupCommand>
     {
-        private readonly IGenericRepository<SizeGroup> _sizeGroupsRepository;
+        private readonly IProductRepository<SizeGroup> _sizeGroupsRepository;
         private readonly IMapper _mapper;
 
         public CreateSizeGroupCommandHandler(
-            IGenericRepository<SizeGroup> sizeGroupsRepository,
+            IProductRepository<SizeGroup> sizeGroupsRepository,
             IMapper mapper)
         {
             _sizeGroupsRepository = sizeGroupsRepository;

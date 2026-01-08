@@ -4,17 +4,18 @@ using CacheHelper.Keys;
 using ImageKitFileManager.Helpers;
 using Product.Application.Features.Categories.Dto;
 using Product.Application.Specifications.Categories;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetCategoriesForest;
 
 internal class GetCategoriesForestQueryHandler : IQueryHandler<GetCategoriesForestQuery, GetCategoriesForestQueryResponse>
 {
-    private readonly IGenericRepository<Category> _categoryRepo;
+    private readonly IProductRepository<Category> _categoryRepo;
     private readonly CacheContext _cacheService;
 
     public GetCategoriesForestQueryHandler(
-        IGenericRepository<Category> categoryRepo,
+        IProductRepository<Category> categoryRepo,
         ICacheStrategy cacheStrategy)
     {
         _categoryRepo = categoryRepo;

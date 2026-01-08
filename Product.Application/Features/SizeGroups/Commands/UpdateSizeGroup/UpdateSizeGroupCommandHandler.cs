@@ -1,16 +1,17 @@
 ﻿using Common.Application.Extensions.Mapster;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Commands.UpdateSizeGroup
 {
     internal class UpdateSizeGroupCommandHandler : ICommandHandler<UpdateSizeGroupCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;
 
         public UpdateSizeGroupCommandHandler(
-            IUnitOfWork unitOfWork,
+            IProductUnitOfWork unitOfWork,
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;

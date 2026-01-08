@@ -1,15 +1,16 @@
 ﻿using Product.Application.Specifications.SizeGroupQuestion;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.SizeGroupQuestions.Queries.GetListSizeGroupQuestion
 {
     public class GetListSizeQuestionQueryHandler : IQueryHandler<GetListSizeQuestionQuery, IEnumerable<SizeQuestionResponse>>
     {
 
-        private readonly IGenericRepository<Domain.Entities.SizeGroupQuestion> _sizeQuestionRepo;
+        private readonly IProductRepository<Domain.Entities.SizeGroupQuestion> _sizeQuestionRepo;
         private readonly IMapper _mapper;
 
 
-        public GetListSizeQuestionQueryHandler(IGenericRepository<Domain.Entities.SizeGroupQuestion> sizeQuestionRepo, IMapper mapper)
+        public GetListSizeQuestionQueryHandler(IProductRepository<Domain.Entities.SizeGroupQuestion> sizeQuestionRepo, IMapper mapper)
         {
             _sizeQuestionRepo = sizeQuestionRepo;
             _mapper = mapper;

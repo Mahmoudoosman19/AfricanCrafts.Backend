@@ -1,14 +1,15 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Queries.GetSizeGroupsLookup
 {
     internal class GetSizeGroupsLookupQueryHandler : IQueryHandler<GetSizeGroupsLookupQuery, IReadOnlyList<GetSizeGroupsLookupResponse>>
     {
-        private readonly IGenericRepository<SizeGroup> _sizeGroupRepo;
+        private readonly IProductRepository<SizeGroup> _sizeGroupRepo;
         private readonly IMapper _mapper;
 
         public GetSizeGroupsLookupQueryHandler(
-            IGenericRepository<SizeGroup> sizeGroupRepo, IMapper mapper)
+            IProductRepository<SizeGroup> sizeGroupRepo, IMapper mapper)
         {
             _sizeGroupRepo = sizeGroupRepo;
             _mapper = mapper;

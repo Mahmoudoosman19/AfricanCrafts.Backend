@@ -1,10 +1,12 @@
-﻿namespace Product.Application.Features.Product.Commands.ChangeProductActivation
+﻿using Product.Domain.Abstraction;
+
+namespace Product.Application.Features.Product.Commands.ChangeProductActivation
 {
     internal class ToggleProductActivationCommandHandler : ICommandHandler<ToggleProductActivationCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
 
-        public ToggleProductActivationCommandHandler(IGenericRepository<Domain.Entities.Product> productRepo)
+        public ToggleProductActivationCommandHandler(IProductRepository<Domain.Entities.Product> productRepo)
         {
             _productRepo = productRepo;
         }

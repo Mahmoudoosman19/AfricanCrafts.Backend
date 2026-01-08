@@ -1,10 +1,12 @@
-﻿namespace Product.Application.Features.Sliders.Commands.ManagSliderActivation
+﻿using Product.Domain.Abstraction;
+
+namespace Product.Application.Features.Sliders.Commands.ManagSliderActivation
 {
     public class ManageSliderActivationCommandHandler:ICommandHandler<ManageSliderActivationCommand>    
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Domain.Entities.Slider> _sliderRepo;
-        public ManageSliderActivationCommandHandler(IMapper mapper, IGenericRepository<Domain.Entities.Slider> sliderRepo)
+        private readonly IProductRepository<Domain.Entities.Slider> _sliderRepo;
+        public ManageSliderActivationCommandHandler(IMapper mapper, IProductRepository<Domain.Entities.Slider> sliderRepo)
         {
             _sliderRepo = sliderRepo;
             _mapper = mapper;

@@ -3,11 +3,12 @@ using Common.Domain.Specification;
 using Common.Persistence.Specifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Product.Domain.Abstraction;
 using System.Linq.Expressions;
 
 namespace Product.Persistence.Repositories
 {
-    internal class ProductRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    internal class ProductRepository<TEntity> : IProductRepository<TEntity> where TEntity : class
     {
         private readonly ProductDbContext _context;
         protected DbSet<TEntity> _entity;

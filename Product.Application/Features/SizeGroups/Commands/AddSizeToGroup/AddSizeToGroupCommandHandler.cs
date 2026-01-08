@@ -1,12 +1,13 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 namespace Product.Application.Features.SizeGroups.Commands.AddSizeToGroup
 {
     public sealed class AddSizeToGroupCommandHandler : ICommandHandler<AddSizeToGroupCommand>
     {
-        private readonly IGenericRepository<SizeGroup> _sizeGroupRepository;
+        private readonly IProductRepository<SizeGroup> _sizeGroupRepository;
 
         public AddSizeToGroupCommandHandler(
-            IGenericRepository<SizeGroup> sizeGroupRepository)
+            IProductRepository<SizeGroup> sizeGroupRepository)
         {
             _sizeGroupRepository = sizeGroupRepository;
         }

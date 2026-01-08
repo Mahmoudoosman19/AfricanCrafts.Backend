@@ -1,16 +1,17 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Specifications.Advertisement;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Advertisements.Queries.GetList
 {
     public class GetAdvertisementBaseStatusAndRoleQueryHandler : IQueryHandler<GetAdvertisementBaseStatusAndRoleQuery, IEnumerable<AdvertisementQueryResponse>>
     {
-        private readonly IGenericRepository<Domain.Entities.Advertisement> _advertisementRepo;
+        private readonly IProductRepository<Domain.Entities.Advertisement> _advertisementRepo;
         private readonly IMapper _mapper;
         private readonly ITokenExtractor _tokenExtractor;
 
         public GetAdvertisementBaseStatusAndRoleQueryHandler(
-            IGenericRepository<Domain.Entities.Advertisement> repository,
+            IProductRepository<Domain.Entities.Advertisement> repository,
             IMapper mapper,
             ITokenExtractor tokenExtractor)
         {

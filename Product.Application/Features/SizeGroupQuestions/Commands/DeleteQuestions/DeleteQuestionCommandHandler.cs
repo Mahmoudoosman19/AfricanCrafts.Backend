@@ -1,14 +1,15 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroupQuestions.Commands.DeleteQuestions
 {
     public class DeleteQuestionCommandHandler : ICommandHandler<DeleteQuestionCommand>
     {
-        private readonly IGenericRepository<SizeGroupQuestion> _questionsRepo;
+        private readonly IProductRepository<SizeGroupQuestion> _questionsRepo;
         //private readonly IGenericRepository<SizeGroup> _sizeGroupRepo;
         private readonly IMapper _mapper;
-        public DeleteQuestionCommandHandler(IGenericRepository<SizeGroupQuestion> questionsRepo, 
-            IGenericRepository<SizeGroup> sizeGroupRepo)
+        public DeleteQuestionCommandHandler(IProductRepository<SizeGroupQuestion> questionsRepo,
+            IProductRepository<SizeGroup> sizeGroupRepo)
         {
             _questionsRepo = questionsRepo;
         }

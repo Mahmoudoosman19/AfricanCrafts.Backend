@@ -1,12 +1,13 @@
 ﻿using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Queries.ProductStatisticsQuery
 {
     public class ProductStatisticsQueryHandler : IQueryHandler<ProductStatisticsQuery, ProductStatisticsQueryResponse>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
 
-        public ProductStatisticsQueryHandler(IGenericRepository<Domain.Entities.Product> productRepo)
+        public ProductStatisticsQueryHandler(IProductRepository<Domain.Entities.Product> productRepo)
         {
             _productRepo = productRepo;
         }

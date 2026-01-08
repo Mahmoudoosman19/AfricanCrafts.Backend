@@ -4,16 +4,17 @@ using Product.Application.Features.Product.Commands.AddProduct.DTOs;
 using Product.Application.Features.Product.Commands.UpdateProduct.DTOs;
 using Product.Application.Features.Product.MappingConfig;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct.UpdateProductHandlers
 {
     internal class UpdateProductImagesHandler : ResponsibilityHandler<UpdateProductInput>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateProductImagesHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateProductImagesHandler(IProductUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

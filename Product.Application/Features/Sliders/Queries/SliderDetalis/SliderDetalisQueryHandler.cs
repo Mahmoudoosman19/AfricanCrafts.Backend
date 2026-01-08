@@ -1,15 +1,16 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Features.Sliders.Queries.GetListSlider;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Sliders.Queries.SliderDetalis
 {
     internal class SliderDetalisQueryHandler : IQueryHandler<SliderDetalisQuery, SliderResponse>
     {
-        private IGenericRepository<Domain.Entities.Slider> _sliderRepo;
+        private IProductRepository<Domain.Entities.Slider> _sliderRepo;
         private readonly IMapper _mapper;
         private readonly IUserManagement _userManagement;
 
-        public SliderDetalisQueryHandler(IGenericRepository<Domain.Entities.Slider> sliderRepo, IMapper mapper, IUserManagement userManagement)
+        public SliderDetalisQueryHandler(IProductRepository<Domain.Entities.Slider> sliderRepo, IMapper mapper, IUserManagement userManagement)
         {
             _sliderRepo = sliderRepo;
             _mapper = mapper;

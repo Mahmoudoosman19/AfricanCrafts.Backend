@@ -1,12 +1,13 @@
 ﻿using Product.Application.Features.Product.Queries.IsProductExist;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Queries.ProductExist
 {
     internal class ProductExistQueryHandler : IQueryHandler<ProductExistQuery, bool>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
 
-        public ProductExistQueryHandler(IGenericRepository<Domain.Entities.Product> productRepo)
+        public ProductExistQueryHandler(IProductRepository<Domain.Entities.Product> productRepo)
         {
             _productRepo = productRepo;
         }

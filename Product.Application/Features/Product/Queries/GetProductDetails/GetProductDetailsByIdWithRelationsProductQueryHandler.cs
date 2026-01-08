@@ -1,16 +1,17 @@
 ﻿
 
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Queries.GetProductDetails
 {
     internal class GetProductDetailsByIdWithRelationsProductQueryHandler : IQueryHandler<GetProductDetailsByIdWithRelationsProductQuery, ProductDetailsQueryResponse>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
 
         public GetProductDetailsByIdWithRelationsProductQueryHandler(IMapper mapper,
-            IGenericRepository<Domain.Entities.Product> productRepo)
+            IProductRepository<Domain.Entities.Product> productRepo)
         {
             _mapper = mapper;
             _productRepo = productRepo;

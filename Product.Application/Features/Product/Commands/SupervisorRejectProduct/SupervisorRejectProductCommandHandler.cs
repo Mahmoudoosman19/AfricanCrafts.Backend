@@ -1,15 +1,16 @@
 using IdentityHelper.Abstraction;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.SupervisorRejectProduct;
 
 public class SupervisorRejectProductCommandHandler : ICommandHandler<SupervisorRejectProductCommand>
 {
-    private readonly IUnitOfWork _uow;
+    private readonly IProductUnitOfWork _uow;
     private readonly IMapper _mapper;
     private readonly ITokenExtractor _tokenExtractor;
 
-    public SupervisorRejectProductCommandHandler(IUnitOfWork uow, IMapper mapper, ITokenExtractor tokenExtractor)
+    public SupervisorRejectProductCommandHandler(IProductUnitOfWork uow, IMapper mapper, ITokenExtractor tokenExtractor)
     {
         _uow = uow;
         _mapper = mapper;

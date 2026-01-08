@@ -1,4 +1,5 @@
 ﻿using ImageKitFileManager.Abstractions;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sliders.Commands.AddSlider
@@ -7,11 +8,11 @@ namespace Product.Application.Features.Sliders.Commands.AddSlider
     {
 
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Slider> _SliderRepo;
+        private readonly IProductRepository<Slider> _SliderRepo;
 
         private readonly IImageKitService _imageKitService;
 
-        public AddSliderCommandHandelr(IGenericRepository<Slider> sliderRepo, IMapper mapper, IImageKitService imageKitService)
+        public AddSliderCommandHandelr(IProductRepository<Slider> sliderRepo, IMapper mapper, IImageKitService imageKitService)
         {
             _SliderRepo = sliderRepo;
             _mapper = mapper;

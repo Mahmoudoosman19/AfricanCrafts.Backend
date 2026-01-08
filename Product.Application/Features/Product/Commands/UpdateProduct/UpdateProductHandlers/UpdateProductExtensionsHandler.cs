@@ -2,16 +2,17 @@
 using Product.Application.Abstractions;
 using Product.Application.Features.Product.Commands.UpdateProduct.DTOs;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct.UpdateProductHandlers
 {
     internal class UpdateProductExtensionsHandler : ResponsibilityHandler<UpdateProductInput>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateProductExtensionsHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateProductExtensionsHandler(IProductUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
