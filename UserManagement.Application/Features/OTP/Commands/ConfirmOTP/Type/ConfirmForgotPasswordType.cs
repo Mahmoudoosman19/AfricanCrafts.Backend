@@ -3,6 +3,7 @@ using Common.Domain.Shared;
 using Microsoft.Extensions.Options;
 using UserManagement.Application.Features.OTP.Commands.ConfirmOTP.Abstract;
 using UserManagement.Application.Specifications.OTP;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 using UserManagement.Domain.Options;
 
@@ -13,8 +14,8 @@ internal class ConfirmForgotPasswordType : BaseConfirmOTP
     private readonly IOptions<OTPOptions> _otpOptions;
 
     public ConfirmForgotPasswordType(CustomUserManager userManager,
-        IGenericRepository<Domain.Entities.OTP> otpRepo,
-        IGenericRepository<Domain.Entities.User> userRepo,
+        IUserRepository<Domain.Entities.OTP> otpRepo,
+        IUserRepository<Domain.Entities.User> userRepo,
         IOptions<OTPOptions> otpOptions) : base(userManager, otpRepo, userRepo)
     {
         _otpOptions = otpOptions;

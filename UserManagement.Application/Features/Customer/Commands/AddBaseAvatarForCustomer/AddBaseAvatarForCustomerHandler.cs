@@ -2,14 +2,15 @@
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Commands.AddBaseAvatarForCustomer
 {
     internal class AddBaseAvatarForCustomerHandler : ICommandHandler<AddBaseAvatarForCustomerCommand ,string>
     {
-        private readonly IGenericRepository<Domain.Entities.Customer> _customerRepo;
+        private readonly IUserRepository<Domain.Entities.Customer> _customerRepo;
         private readonly ITokenExtractor _tokenExtractor;
-        public AddBaseAvatarForCustomerHandler(IGenericRepository<Domain.Entities.Customer> customerRepo, ITokenExtractor tokenExtractor)
+        public AddBaseAvatarForCustomerHandler(IUserRepository<Domain.Entities.Customer> customerRepo, ITokenExtractor tokenExtractor)
         {
             _customerRepo = customerRepo;
             _tokenExtractor = tokenExtractor;

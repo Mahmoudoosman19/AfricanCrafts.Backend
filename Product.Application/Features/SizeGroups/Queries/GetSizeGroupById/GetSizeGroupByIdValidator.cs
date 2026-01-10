@@ -1,11 +1,12 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Queries.GetSizeGroupById
 {
     internal sealed class GetSizeGroupByIdValidator : AbstractValidator<GetSizeGroupByIdQuery>
     {
         public GetSizeGroupByIdValidator(
-            IGenericRepository<SizeGroup> sizeGroupRepo)
+            IProductRepository<SizeGroup> sizeGroupRepo)
         {
             RuleFor(x => x.Id)
                 .NotEmpty()

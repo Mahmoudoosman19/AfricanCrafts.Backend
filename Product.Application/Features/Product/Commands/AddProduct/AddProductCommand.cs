@@ -19,7 +19,6 @@ namespace Product.Application.Features.Product.Commands.AddProduct
         public double Price { get; init; }
         [DisplayName("الفئة")]
         public Guid CategoryId { get; init; }
-        public Guid? PointsId { get; init; }
         [DisplayName("الصور")]
         public List<AddProductImageDTO> Images { get; init; } = new();
         [DisplayName("الاحجام")]

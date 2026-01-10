@@ -3,15 +3,16 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Auth.Commands.ChangePhoneNumber
 {
     internal class ChangePhoneNumberCommandHandler : ICommandHandler<ChangePhoneNumberCommand>
     {
         private readonly ITokenExtractor _tokenExtractor;
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo;
         private readonly CustomUserManager _userManager;
-        public ChangePhoneNumberCommandHandler(ITokenExtractor tokenExtractor, IGenericRepository<Domain.Entities.User> userRepo, CustomUserManager userManager)
+        public ChangePhoneNumberCommandHandler(ITokenExtractor tokenExtractor, IUserRepository<Domain.Entities.User> userRepo, CustomUserManager userManager)
         {
             _tokenExtractor = tokenExtractor;
             _userRepo = userRepo;

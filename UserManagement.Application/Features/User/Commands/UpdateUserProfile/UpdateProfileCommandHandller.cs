@@ -3,17 +3,18 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using MapsterMapper;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.User.Commands.UpdateUserProfile
 {
     internal class UpdateProfileCommandHandler : ICommandHandler<UpdateProfileCommand>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo;
         private readonly ITokenExtractor _tokenExtractor;
 
         public UpdateProfileCommandHandler(
-            IGenericRepository<Domain.Entities.User> userRepo,
+            IUserRepository<Domain.Entities.User> userRepo,
             IMapper mapper,
             ITokenExtractor tokenExtractor)
         {

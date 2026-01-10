@@ -1,4 +1,5 @@
 ﻿using Product.Application.SharedDTOs.SizeGroup;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Commands.CreateSizeGroup
@@ -6,10 +7,10 @@ namespace Product.Application.Features.SizeGroups.Commands.CreateSizeGroup
     public sealed class CreateSizeGroupCommandValidator
         : AbstractValidator<CreateSizeGroupCommand>
     {
-        private readonly IGenericRepository<SizeGroup> _sizeGroupRepository;
+        private readonly IProductRepository<SizeGroup> _sizeGroupRepository;
         public CreateSizeGroupCommandValidator(
-            IGenericRepository<SizeGroup> sizeGroupRepository,
-            IGenericRepository<Size> sizeRepository)
+            IProductRepository<SizeGroup> sizeGroupRepository,
+            IProductRepository<Size> sizeRepository)
         {
             _sizeGroupRepository = sizeGroupRepository;
 

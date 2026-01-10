@@ -1,10 +1,11 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sliders.Commands.DeleteSlider
 {
     public class DeleteSliderCommandValidator : AbstractValidator<DeleteSliderCommand>
     {
-        public DeleteSliderCommandValidator(IGenericRepository<Slider> sliderRepo )
+        public DeleteSliderCommandValidator(IProductRepository<Slider> sliderRepo )
         {
             RuleFor(x => x.Id)
                 .NotEmpty()

@@ -1,11 +1,12 @@
-﻿using Product.Domain.Enums;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Enums;
 
 namespace Product.Application.Features.Product.Queries.GetProductDetailsCustomer
 {
     internal class GetProductDetailsCustomerValidator : AbstractValidator<CustomerGetProductDetailsByIdQuery>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
-        public GetProductDetailsCustomerValidator(IGenericRepository<Domain.Entities.Product> productRepo)
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
+        public GetProductDetailsCustomerValidator(IProductRepository<Domain.Entities.Product> productRepo)
         {
             _productRepo = productRepo;
             RuleFor(x => x.Id)

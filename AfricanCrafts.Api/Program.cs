@@ -4,8 +4,11 @@ using CacheHelper;
 using IdentityHelper.BI;
 using ImageKitFileManager;
 using LoggerHelper;
+using Microsoft.EntityFrameworkCore;
 using Product.Presentation;
 using Serilog;
+using UserManagement.Infrastructure.Seeders;
+using UserManagement.Persistence;
 using UserManagement.Presentation;
 
 namespace AfricanCrafts.Api
@@ -74,6 +77,23 @@ namespace AfricanCrafts.Api
 
             app.MapControllers();
 
+            #region Update Database
+            using var scope = app.Services.CreateScope();
+            var service = scope.ServiceProvider;
+
+            var userContext = service.GetRequiredService<UserManagementDbContext>();
+
+            var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+            try
+            {
+                 userContext.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "An error occured while updating database!");
+            }
+            #endregion
             app.Run();
         }
     }

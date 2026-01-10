@@ -1,4 +1,5 @@
 ﻿using Product.Application.Features.Favorite.Command.ToggelFavorit;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Favorite.Command.ToggelFavorite
 {
@@ -6,7 +7,7 @@ namespace Product.Application.Features.Favorite.Command.ToggelFavorite
     {
         private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
         public ToggelFavoriteCommandValidator(
-           IGenericRepository<Domain.Entities.Product> productRepo
+           IProductRepository<Domain.Entities.Product> productRepo
           )
         {
             _productRepo = productRepo;

@@ -1,13 +1,14 @@
 ﻿using Product.Application.Features.Product.Commands.AddProduct.DTOs;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.AddProduct.Validators
 {
     internal class AddProductExtensionDTOValidator : AbstractValidator<AddProductExtensionDTO>
     {
-        private readonly IGenericRepository<Size> _sizeRepo;
+        private readonly IProductRepository<Size> _sizeRepo;
 
-        public AddProductExtensionDTOValidator(IGenericRepository<Size> sizeRepo, IGenericRepository<Domain.Entities.Color> colorRepo)
+        public AddProductExtensionDTOValidator(IProductRepository<Size> sizeRepo, IProductRepository<Domain.Entities.Color> colorRepo)
         {
             _sizeRepo = sizeRepo;
 

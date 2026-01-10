@@ -1,12 +1,13 @@
 ﻿using Product.Application.Features.Product.Commands.UpdateProduct.DTOs;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
 {
     internal class UpdateProductExtensionDTOValidator : AbstractValidator<UpdateProductExtensionDTO>
     {
-        public UpdateProductExtensionDTOValidator(IGenericRepository<ProductExtension> productExtensionRepo,
-            IGenericRepository<Size> sizeRepo, IGenericRepository<Domain.Entities.Color> colorRepo)
+        public UpdateProductExtensionDTOValidator(IProductRepository<ProductExtension> productExtensionRepo,
+            IProductRepository<Size> sizeRepo, IProductRepository<Domain.Entities.Color> colorRepo)
         {
             When(exe => exe.Id != Guid.Empty, () =>
             {

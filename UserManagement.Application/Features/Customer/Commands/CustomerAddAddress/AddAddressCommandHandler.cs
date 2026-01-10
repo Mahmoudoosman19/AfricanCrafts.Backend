@@ -3,14 +3,15 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using UserManagement.Application.Specifications.Customer;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Commands.CustomerAddAddress
 {
     public class AddAddressCommandHandler : ICommandHandler<AddAddressCommand>
     {
-        private readonly IGenericRepository<Address> _addressRepo;
+        private readonly IUserRepository<Address> _addressRepo;
         private readonly ITokenExtractor _tokenExtractor;
-        public AddAddressCommandHandler(IGenericRepository<Address> addressRepo, ITokenExtractor tokenExtractor)
+        public AddAddressCommandHandler(IUserRepository<Address> addressRepo, ITokenExtractor tokenExtractor)
         {
             _addressRepo = addressRepo;
             _tokenExtractor = tokenExtractor;

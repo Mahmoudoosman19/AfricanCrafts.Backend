@@ -1,13 +1,14 @@
 ﻿using Common.Application.Abstractions.Messaging;
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.User.Commands.RestoredUser
 {
     public class RestoredUserCommandHandler:ICommandHandler<RestoredUserCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.User> _userRepository;
-        public RestoredUserCommandHandler(IGenericRepository<Domain.Entities.User> userRepository)
+        private readonly IUserRepository<Domain.Entities.User> _userRepository;
+        public RestoredUserCommandHandler(IUserRepository<Domain.Entities.User> userRepository)
         {
             _userRepository = userRepository;
         }

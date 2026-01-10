@@ -1,14 +1,15 @@
 ﻿using Common.Domain.Repositories;
 using UserManagement.Application.Abstractions;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Seeders
 {
     public class RolesSeeder : ISeeder
     {
-        private readonly IGenericRepository<Role> _roleRepo;
+        private readonly IUserRepository<Role> _roleRepo;
 
-        public RolesSeeder(IGenericRepository<Role> roleRepo)
+        public RolesSeeder(IUserRepository<Role> roleRepo)
         {
             _roleRepo = roleRepo;
         }
@@ -18,7 +19,7 @@ namespace UserManagement.Infrastructure.Seeders
             var roles = new List<Role>()
             {
                 new Role("مدير", "Admin"),
-                new Role("مشرف", "SuperVisor"),
+                new Role("مشرف", "Supervisor"),
                 new Role("زبون", "Customer"),
             };
 

@@ -5,19 +5,20 @@ using MapsterMapper;
 using UserManagement.Application.DTOs;
 using UserManagement.Application.Specifications.Customer;
 using UserManagement.Application.Specifications.Role;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Customer.Queries.GetCustomerByRoleId
 {
     public class GetCustomerByRoleIdQueryHandler : IQueryHandler<GetCustomerByRoleIdQuery, IReadOnlyList<UserDto>>
     {
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo;
-        private readonly IGenericRepository<Role> _roleRepo;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo;
+        private readonly IUserRepository<Role> _roleRepo;
         private readonly IMapper _mapper;
         private readonly CustomUserManager _userManager;
 
         public GetCustomerByRoleIdQueryHandler(IMapper mapper, CustomUserManager userManager,
-            IGenericRepository<Domain.Entities.User> userRepo, IGenericRepository<Role> roleRepo)
+            IUserRepository<Domain.Entities.User> userRepo, IUserRepository<Role> roleRepo)
         {
             _mapper = mapper;
             _userManager = userManager;

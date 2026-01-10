@@ -1,13 +1,14 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeTable.Commands.CreatesSizeTable
 {
     public class CreatesQuestionsCommandValidator: AbstractValidator<CreatesQuestionsCommand>
     {
-        private readonly IGenericRepository<SizeGroupQuestion> _questionsRepo;
+        private readonly IProductRepository<SizeGroupQuestion> _questionsRepo;
 
-        public CreatesQuestionsCommandValidator(IGenericRepository<SizeGroupQuestion> questionsRepo,
-            IGenericRepository<SizeGroup> sizeGroupRepo)
+        public CreatesQuestionsCommandValidator(IProductRepository<SizeGroupQuestion> questionsRepo,
+            IProductRepository<SizeGroup> sizeGroupRepo)
         {
             _questionsRepo = questionsRepo;
 

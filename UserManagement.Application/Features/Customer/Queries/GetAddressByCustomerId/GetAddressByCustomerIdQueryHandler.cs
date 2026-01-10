@@ -5,16 +5,17 @@ using IdentityHelper.Abstraction;
 using MapsterMapper;
 using UserManagement.Application.DTOs;
 using UserManagement.Application.Specifications.Customer;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Queries.GetAddressByCustomerId
 {
     public class GetListAddressQueryHandler : IQueryHandler<GetAddressByCustomerIdQuery, IEnumerable<CustomerAddressQueryResponse>>
     {
-        private readonly IGenericRepository<Address> _AddressRepo;
+        private readonly IUserRepository<Address> _AddressRepo;
         private readonly IMapper _Mapper;
         private readonly ITokenExtractor _tokenExtractor;
 
-        public GetListAddressQueryHandler(IMapper mapper, IGenericRepository<Address> addressRepo, ITokenExtractor tokenExtractor)
+        public GetListAddressQueryHandler(IMapper mapper, IUserRepository<Address> addressRepo, ITokenExtractor tokenExtractor)
         {
             _Mapper = mapper;
             _AddressRepo = addressRepo;

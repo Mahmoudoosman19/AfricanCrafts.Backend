@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UserManagement.Application.Specifications.MessageNotification;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Notifications.Queries.GetNotificationMessageAndReplace
@@ -13,9 +14,9 @@ namespace UserManagement.Application.Features.Notifications.Queries.GetNotificat
     public class GetNotificationMessageAndReplaceQueryHandler
         : IQueryHandler<GetNotificationMessageAndReplaceQuery, GetNotificationMessageQueryResponse>
     {
-        private readonly IGenericRepository<NotificationMessages> _messageRepo;
+        private readonly IUserRepository<NotificationMessages> _messageRepo;
 
-        public GetNotificationMessageAndReplaceQueryHandler(IGenericRepository<NotificationMessages> messageRepo)
+        public GetNotificationMessageAndReplaceQueryHandler(IUserRepository<NotificationMessages> messageRepo)
         {
             _messageRepo = messageRepo;
         }

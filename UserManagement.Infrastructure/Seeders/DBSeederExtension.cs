@@ -11,16 +11,20 @@ namespace UserManagement.Infrastructure.Seeders
             services.AddScoped<ISeeder, PermissionsSeeder>();
             services.AddScoped<ISeeder, RolesPermissionsSeeder>();
             services.AddScoped<ISeeder, UsersSeeder>();
-            services.AddScoped<ISeeder, AdminWalletSeeder>();
 
             using var serviceProvider = services.BuildServiceProvider();
 
             var seeders = serviceProvider.GetServices<ISeeder>();
 
             seeders = seeders.OrderBy(x => x.ExecutionOrder);
-
-            foreach (var seeder in seeders)
-                await seeder.SeedAsync();
+            try
+            {
+                foreach (var seeder in seeders)
+                    await seeder.SeedAsync();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             return services;
         }

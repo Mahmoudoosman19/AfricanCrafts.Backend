@@ -1,16 +1,17 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Features.Product.Commands.UpdateProduct.DTOs;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
 {
     internal class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
         private readonly ITokenExtractor _userManager;
 
-        public UpdateProductCommandValidator(IGenericRepository<Domain.Entities.Product> productRepo, IGenericRepository<ProductImage> productImageRepo, IGenericRepository<ProductExtension> productExtensionRepo,
-            IGenericRepository<Category> categoryRepo, IGenericRepository<Domain.Entities.Color> colorRepo, IGenericRepository<Size> sizeRepo, ITokenExtractor userManager)
+        public UpdateProductCommandValidator(IProductRepository<Domain.Entities.Product> productRepo, IProductRepository<ProductImage> productImageRepo, IProductRepository<ProductExtension> productExtensionRepo,
+            IProductRepository<Category> categoryRepo, IProductRepository<Domain.Entities.Color> colorRepo, IProductRepository<Size> sizeRepo, ITokenExtractor userManager)
         {
             _productRepo = productRepo;
             _userManager = userManager;
@@ -66,13 +67,13 @@ namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
                 });
         }
 
-        private async Task<bool> ImagesUnderThisProduct(IGenericRepository<ProductImage> productImageRepo, List<UpdateProductImageDTO> dtos, Guid productId, CancellationToken cancellationToken)
+        private async Task<bool> ImagesUnderThisProduct(IProductRepository<ProductImage> productImageRepo, List<UpdateProductImageDTO> dtos, Guid productId, CancellationToken cancellationToken)
         {
             var dtoIds = dtos.Where(dto => dto.Id != null).Select(dto => dto.Id).ToList();
             return !await productImageRepo.IsExistAsync(img => dtoIds.Contains(img.Id) && img.ProductId != productId, cancellationToken);
         }
 
-        private async Task<bool> ExtensionsUnderThisProduct(IGenericRepository<ProductExtension> productExtensionRepo, List<UpdateProductExtensionDTO> dtos, Guid productId, CancellationToken cancellationToken)
+        private async Task<bool> ExtensionsUnderThisProduct(IProductRepository<ProductExtension> productExtensionRepo, List<UpdateProductExtensionDTO> dtos, Guid productId, CancellationToken cancellationToken)
         {
             var dtoIds = dtos.Where(dto => dto.Id != null).Select(dto => dto.Id).ToList();
             return !await productExtensionRepo.IsExistAsync(exe => dtoIds.Contains(exe.Id) && exe.ProductId != productId, cancellationToken);

@@ -4,20 +4,21 @@ using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using MapsterMapper;
 using UserManagement.Application.DTOs;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Notifications.Queries
 {
     public class GetNotificationsByUserIdQueryHandler : IQueryHandler<GetNotificationsByUserIdQuery, List<NotificationDto>>
     {
-        private readonly IGenericRepository<Domain.Entities.Notifications> _notificationRepo;
+        private readonly IUserRepository<Domain.Entities.Notifications> _notificationRepo;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserUnitOfWork _unitOfWork;
         private readonly ITokenExtractor _tokenExtractor;
 
         public GetNotificationsByUserIdQueryHandler(
-           IGenericRepository<Domain.Entities.Notifications> notificationRepo,
+           IUserRepository<Domain.Entities.Notifications> notificationRepo,
            IMapper mapper,
-           IUnitOfWork unitOfWork,
+           IUserUnitOfWork unitOfWork,
            ITokenExtractor itokenextractor)
 
         {

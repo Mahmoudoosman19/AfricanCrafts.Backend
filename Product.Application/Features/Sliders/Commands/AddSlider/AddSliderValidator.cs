@@ -1,13 +1,14 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sliders.Commands.AddSlider
 {
 
     public class AddSliderValidator : AbstractValidator<AddSliderCommand>
     {
-        private readonly IGenericRepository<Category> _CategoryRepo;
-        private readonly IGenericRepository<Slider> _SliderRepo;
-        public AddSliderValidator(IGenericRepository<Category> category, IGenericRepository<Slider> sliderRepo)
+        private readonly IProductRepository<Category> _CategoryRepo;
+        private readonly IProductRepository<Slider> _SliderRepo;
+        public AddSliderValidator(IProductRepository<Category> category, IProductRepository<Slider> sliderRepo)
         {
             _CategoryRepo = category;
             _SliderRepo = sliderRepo;   

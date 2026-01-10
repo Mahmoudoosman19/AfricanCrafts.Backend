@@ -3,13 +3,14 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using UserManagement.Application.Features.Notifications.Command.NotificationMessage;
 using UserManagement.Application.Specifications.MessageNotification;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 public class AddNotificationMessageCommandHandler : ICommandHandler<AddNotificationMessageCommand>
 {
-    private readonly IGenericRepository<NotificationMessages> _notificationRepo;
+    private readonly IUserRepository<NotificationMessages> _notificationRepo;
     public AddNotificationMessageCommandHandler(
-        IGenericRepository<NotificationMessages> notificationRepo)
+        IUserRepository<NotificationMessages> notificationRepo)
     {
         _notificationRepo = notificationRepo;
     }

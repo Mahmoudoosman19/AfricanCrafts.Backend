@@ -1,13 +1,14 @@
 ﻿using Common.Application.Abstractions.Messaging;
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.wallet.Command.CreateWallet
 {
     internal class CreateWalletCommandHandler : ICommandHandler<CreateWalletCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Wallet> _WalletRepository;
-        public CreateWalletCommandHandler(IGenericRepository<Domain.Entities.Wallet> walletRepository)
+        private readonly IUserRepository<Domain.Entities.Wallet> _WalletRepository;
+        public CreateWalletCommandHandler(IUserRepository<Domain.Entities.Wallet> walletRepository)
         {
             _WalletRepository = walletRepository;
         }

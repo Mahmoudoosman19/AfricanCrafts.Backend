@@ -1,14 +1,15 @@
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Commands.UpdateSizeGroup;
 
 public class UpdateSizeGroupCommandValidator : AbstractValidator<UpdateSizeGroupCommand>
 {
-    private readonly IGenericRepository<SizeGroup> _sizeGroupRepository;
+    private readonly IProductRepository<SizeGroup> _sizeGroupRepository;
 
     public UpdateSizeGroupCommandValidator(
-        IGenericRepository<SizeGroup> sizeGroupRepository,
-        IGenericRepository<Size> sizeRepository)
+        IProductRepository<SizeGroup> sizeGroupRepository,
+        IProductRepository<Size> sizeRepository)
     {
         _sizeGroupRepository = sizeGroupRepository;
         this.ClassLevelCascadeMode = CascadeMode.Stop;

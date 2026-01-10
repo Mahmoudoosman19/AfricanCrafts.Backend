@@ -1,14 +1,15 @@
 ﻿using Common.Application.Abstractions.Messaging;
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.MetaData.Commands
 {
     public class AddOrUpdateMetaDataCommandHandler : ICommandHandler<AddOrUpdateMetaDataCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.MetaData> _metaDataRepository;
+        private readonly IUserRepository<Domain.Entities.MetaData> _metaDataRepository;
 
-        public AddOrUpdateMetaDataCommandHandler(IGenericRepository<Domain.Entities.MetaData> metaDataRepository)
+        public AddOrUpdateMetaDataCommandHandler(IUserRepository<Domain.Entities.MetaData> metaDataRepository)
         {
             _metaDataRepository = metaDataRepository;
         }

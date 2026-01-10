@@ -4,15 +4,16 @@ using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using ImageKitFileManager.Abstractions;
 using ImageKitFileManager.Enums;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Commands.AddCustomizedAvatarForCustomer
 {
     internal class AddCustomizedRefundProofForCustomerCommandHandler : ICommandHandler<AddCustomizedAvatarForCustomerCommand, string>
     {
-        private readonly IGenericRepository<Domain.Entities.Customer> _customerRepo;
+        private readonly IUserRepository<Domain.Entities.Customer> _customerRepo;
         private readonly ITokenExtractor _tokenExtractor;
         private readonly IImageKitService _imageKitService;
-        public AddCustomizedRefundProofForCustomerCommandHandler(IGenericRepository<Domain.Entities.Customer> customerRepo, ITokenExtractor tokenExtractor, IImageKitService imageKitService)
+        public AddCustomizedRefundProofForCustomerCommandHandler(IUserRepository<Domain.Entities.Customer> customerRepo, ITokenExtractor tokenExtractor, IImageKitService imageKitService)
         {
             _customerRepo = customerRepo;
             _tokenExtractor = tokenExtractor;

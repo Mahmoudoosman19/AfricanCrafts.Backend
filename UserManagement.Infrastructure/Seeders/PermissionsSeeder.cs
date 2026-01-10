@@ -1,14 +1,15 @@
 using Common.Domain.Repositories;
 using UserManagement.Application.Abstractions;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Seeders
 {
     public class PermissionsSeeder : ISeeder
     {
-        private readonly IGenericRepository<Permission> _permissionRepo;
+        private readonly IUserRepository<Permission> _permissionRepo;
 
-        public PermissionsSeeder(IGenericRepository<Permission> permissionRepo)
+        public PermissionsSeeder(IUserRepository<Permission> permissionRepo)
         {
             _permissionRepo = permissionRepo;
         }
@@ -72,8 +73,6 @@ namespace UserManagement.Infrastructure.Seeders
                   new("لوحة التحكم إلغاء الطلب","DashboardCancelOrder"),
                   new("العميل الغاء الطلب","CustomerCancelOrder"),
                 new ("حذف التعليقات","DeleteComment"),
-                new("لوحة التحكم إلغاء الطلب","DashboardCancelOrder"),
-                new("تفاصيل المنتج","ProductCustomerDetails"),
                  new("عرض المشرف لقائمة الطلب","AdminViewListOrder"),
                 new("تفاصيل الطلب","GetOrderDetails"),
                 new("لوحة التحكم عرض تفاصيل الطلب","DashboardViewOrderDetails"),

@@ -4,15 +4,16 @@ using Common.Domain.Shared;
 using MediatR;
 using UserManagement.Application.Features.wallet.Command.CreateWallet;
 using UserManagement.Application.Specifications.Wallet;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Wallet.Command.AddTransaction
 {
     public class AddTransactionHandler(
-        IUnitOfWork unitOfWork,
+        IUserUnitOfWork unitOfWork,
         ISender sender) : ICommandHandler<AddTransactionBatchCommand, bool>
     {
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IUserUnitOfWork _unitOfWork = unitOfWork;
         private readonly ISender _sender = sender;
 
         public async Task<ResponseModel<bool>> Handle(AddTransactionBatchCommand request, CancellationToken cancellationToken)

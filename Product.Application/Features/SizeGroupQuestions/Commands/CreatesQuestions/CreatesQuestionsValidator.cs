@@ -1,4 +1,5 @@
 ﻿using Product.Application.SharedDTOs.CreatesQuestions;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.CreatesَََQuestions.Commands.CreatesQuestions
@@ -6,7 +7,7 @@ namespace Product.Application.Features.CreatesَََQuestions.Commands.CreatesQu
     public class CreatesQuestionsValidator: AbstractValidator<CreatesQuestionsDto>
     {
        
-        public CreatesQuestionsValidator(IGenericRepository<SizeGroupQuestion> sizeQestionRepo)
+        public CreatesQuestionsValidator(IProductRepository<SizeGroupQuestion> sizeQestionRepo)
         {
 
             RuleFor(x => x .QuestionAr)

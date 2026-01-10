@@ -4,8 +4,6 @@
     {
         Admin,
         Supervisor,
-        Vendor,
         Customer,
-        VendorByAdmin
     }
 }
