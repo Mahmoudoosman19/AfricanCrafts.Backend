@@ -5,8 +5,7 @@ namespace Product.Application.Features.Product.Commands.SuperVisorAddProduct;
 
 public class SuperVisorAddProductCommand : ICommand<string>
 {
-    [DisplayName("معرف البائع")]
-    public Guid VendorId { get; init; }
+   
     [DisplayName("الاسم العربي")]
     public string NameAr { get; init; } = null!;
     [DisplayName("الاسم الانجليزي")]

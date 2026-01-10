@@ -1,5 +1,6 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Helpers;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Commands.ChangeProductActivation;
 
@@ -7,9 +8,9 @@ internal class ToggleProductActivationCommandValidator
     : AbstractValidator<ToggleProductActivationCommand>
 {
     private readonly ITokenExtractor _currentUser;
-    private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+    private readonly IProductRepository<Domain.Entities.Product> _productRepo;
     public ToggleProductActivationCommandValidator(
-        IGenericRepository<Domain.Entities.Product> productRepo,
+        IProductRepository<Domain.Entities.Product> productRepo,
         ITokenExtractor currentUser)
     {
         _currentUser = currentUser;

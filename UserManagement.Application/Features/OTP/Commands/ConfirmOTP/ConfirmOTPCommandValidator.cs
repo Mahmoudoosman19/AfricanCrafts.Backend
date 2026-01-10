@@ -1,5 +1,6 @@
 ﻿using Common.Domain.Repositories;
 using UserManagement.Application.Specifications.OTP;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.OTP.Commands.ConfirmOTP
@@ -7,10 +8,10 @@ namespace UserManagement.Application.Features.OTP.Commands.ConfirmOTP
     internal class ConfirmOTPCommandValidator : AbstractValidator<ConfirmOTPCommand>
     {
         private readonly CustomUserManager _userManager;
-        private readonly IGenericRepository<Domain.Entities.OTP> _oTPRepo;
+        private readonly IUserRepository<Domain.Entities.OTP> _oTPRepo;
         private Domain.Entities.OTP? _otp;
 
-        public ConfirmOTPCommandValidator(CustomUserManager userManager, IGenericRepository<Domain.Entities.OTP> OTPRepo)
+        public ConfirmOTPCommandValidator(CustomUserManager userManager, IUserRepository<Domain.Entities.OTP> OTPRepo)
         {
             _userManager = userManager;
             _oTPRepo = OTPRepo;

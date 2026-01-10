@@ -1,11 +1,12 @@
 ﻿using Common.Application.Extensions.FluentValidation;
 using Common.Domain.Repositories;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Commands.CustomerDeletedAddressById
 {
     public class DeleteAddressByIdValidator : AbstractValidator<DeleteAddressByIdCommand>
     {
-        public DeleteAddressByIdValidator(IGenericRepository<Address> addressRepo)
+        public DeleteAddressByIdValidator(IUserRepository<Address> addressRepo)
         {
             RuleFor(x => x.Id)
                .NotEmpty()

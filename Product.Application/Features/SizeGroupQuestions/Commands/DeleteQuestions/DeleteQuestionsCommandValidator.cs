@@ -1,10 +1,11 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroupQuestions.Commands.DeleteQuestions
 {
     public class DeleteQuestionsCommandValidator : AbstractValidator<DeleteQuestionCommand>
     {
-        public DeleteQuestionsCommandValidator(IGenericRepository<SizeGroupQuestion> questionsRepo)
+        public DeleteQuestionsCommandValidator(IProductRepository<SizeGroupQuestion> questionsRepo)
         {
             RuleFor(x => x.SizeGroupQuestionId)
                 .NotEmpty()

@@ -9,8 +9,8 @@ namespace UserManagement.Application.Features.Auth.Commands.MappingConfig
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<CustomerRegisterDto, Domain.Entities.User>()
-                .Map(dest => dest.FullNameAr, src => src.FullName.IsArabicLanguage() ? src.FullName : null)
-                .Map(dest => dest.FullNameEn, src => src.FullName.IsEnglishLanguage() ? src.FullName : null);
+                .Map(dest => dest.FullNameAr, src => src.FullNameAr.IsArabicLanguage() ? src.FullNameAr : null)
+                .Map(dest => dest.FullNameEn, src => src.FullNameEn.IsEnglishLanguage() ? src.FullNameEn : null);
         }
     }
 }

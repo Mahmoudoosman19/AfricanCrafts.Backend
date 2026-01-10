@@ -5,15 +5,16 @@ using IdentityHelper.Abstraction;
 using MapsterMapper;
 using UserManagement.Application.Features.Wallet.Queries.GetAdminWalletTransactions;
 using UserManagement.Application.Specifications.Wallet;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.wallet.Queries.GetWalletTransactions
 {
     internal class WalletTransactionQueryHandler : IQueryHandler<WalletTransactionQuery, List<WalletTransactionQueryResponse>>
     {
-        private readonly IGenericRepository<WalletTransaction> _walletTransactionRepository;
+        private readonly IUserRepository<WalletTransaction> _walletTransactionRepository;
         private readonly ITokenExtractor _tokenExtractor;
         private readonly IMapper _mapper;
-        public WalletTransactionQueryHandler(IGenericRepository<WalletTransaction> walletTransactionRepository, ITokenExtractor tokenExtractor, IMapper mapper)
+        public WalletTransactionQueryHandler(IUserRepository<WalletTransaction> walletTransactionRepository, ITokenExtractor tokenExtractor, IMapper mapper)
         {
             _walletTransactionRepository = walletTransactionRepository;
             _tokenExtractor = tokenExtractor;

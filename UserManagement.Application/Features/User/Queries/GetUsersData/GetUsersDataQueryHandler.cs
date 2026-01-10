@@ -3,15 +3,16 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using MapsterMapper;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.User.Queries.GetUsersData
 {
     public class GetUsersDataQueryHandler : IQueryHandler<GetUsersDataQuery, List<GetUsersDataQueryResponse>>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo;
 
-        public GetUsersDataQueryHandler(IMapper mapper, IGenericRepository<Domain.Entities.User> userRepo)
+        public GetUsersDataQueryHandler(IMapper mapper, IUserRepository<Domain.Entities.User> userRepo)
         {
             _mapper = mapper;
             _userRepo = userRepo;

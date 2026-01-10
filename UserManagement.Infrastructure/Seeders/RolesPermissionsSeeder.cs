@@ -1,17 +1,18 @@
 ﻿using Common.Domain.Repositories;
 using UserManagement.Application.Abstractions;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Seeders
 {
     public class RolesPermissionsSeeder : ISeeder
     {
-        private readonly IGenericRepository<RolePermission> _rolePermissionRepo;
-        private readonly IGenericRepository<Role> _roleRepo;
-        private readonly IGenericRepository<Permission> _permissionRepo;
+        private readonly IUserRepository<RolePermission> _rolePermissionRepo;
+        private readonly IUserRepository<Role> _roleRepo;
+        private readonly IUserRepository<Permission> _permissionRepo;
 
-        public RolesPermissionsSeeder(IGenericRepository<RolePermission> rolePermissionRepo,
-            IGenericRepository<Role> roleRepo, IGenericRepository<Permission> permissionRepo)
+        public RolesPermissionsSeeder(IUserRepository<RolePermission> rolePermissionRepo,
+            IUserRepository<Role> roleRepo, IUserRepository<Permission> permissionRepo)
         {
             _rolePermissionRepo = rolePermissionRepo;
             _roleRepo = roleRepo;
@@ -62,7 +63,6 @@ namespace UserManagement.Infrastructure.Seeders
                 new RolePermissionSeederDto("Admin","DashboardCancelOrder"),
                 new RolePermissionSeederDto("Admin","AdminViewListOrder"),
                 new RolePermissionSeederDto("Admin","DashboardViewOrderDetails"),
-               // new RolePermissionSeederDto("Admin","GetProductReview"),
                 new RolePermissionSeederDto("Admin","UpdateUserProfile"),
                 new RolePermissionSeederDto("Admin","AddAddress"),
                 new RolePermissionSeederDto("Admin","EditAddress"),
@@ -130,6 +130,7 @@ namespace UserManagement.Infrastructure.Seeders
 
             };
 
+          
             var customerPermissions = new List<RolePermissionSeederDto>() {
                 new RolePermissionSeederDto("Customer", "ToggleUserFavorite"),
                 new RolePermissionSeederDto("Customer", "GetListUserFavorite"),

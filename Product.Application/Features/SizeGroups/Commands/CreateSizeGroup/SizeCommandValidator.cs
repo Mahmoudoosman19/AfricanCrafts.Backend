@@ -1,4 +1,5 @@
 ﻿using Product.Application.SharedDTOs.SizeGroup;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Commands.CreateSizeGroup
@@ -7,7 +8,7 @@ namespace Product.Application.Features.SizeGroups.Commands.CreateSizeGroup
         : AbstractValidator<CreateSizeDto>
     {
         public SizeCommandValidator(
-            IGenericRepository<Size> sizeRepository)
+            IProductRepository<Size> sizeRepository)
         {
             this.ClassLevelCascadeMode = CascadeMode.Stop;
 

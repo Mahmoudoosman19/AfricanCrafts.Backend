@@ -1,4 +1,5 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.TemplateSizes.Commands.DeleteSizeGroup
 {
@@ -7,7 +8,7 @@ namespace Product.Application.Features.TemplateSizes.Commands.DeleteSizeGroup
     {
 
         public DeleteSizeGroupCommandValidator(
-            IGenericRepository<SizeGroup> sizeGroupRepository)
+            IProductRepository<SizeGroup> sizeGroupRepository)
         {
 
             RuleFor(x => x.Id)

@@ -1,14 +1,15 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.SizeGroups.Commands.AddSizeToGroup
 {
     public sealed class AddSizeToGroupCommandValidator
         : AbstractValidator<AddSizeToGroupCommand>
     {
-        private readonly IGenericRepository<Size> _sizeRepository;
+        private readonly IProductRepository<Size> _sizeRepository;
         public AddSizeToGroupCommandValidator(
-            IGenericRepository<SizeGroup> sizeGroupRepository,
-            IGenericRepository<Size> sizeRepository)
+            IProductRepository<SizeGroup> sizeGroupRepository,
+            IProductRepository<Size> sizeRepository)
         {
             _sizeRepository = sizeRepository;
             RuleFor(x => x.SizeGroupId)

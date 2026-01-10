@@ -2,6 +2,7 @@
 using Common.Domain.Shared;
 using UserManagement.Application.Features.OTP.Commands.ConfirmOTP.Abstract;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.OTP.Commands.ConfirmOTP.Type
@@ -9,8 +10,8 @@ namespace UserManagement.Application.Features.OTP.Commands.ConfirmOTP.Type
     internal class ConfirmUserPhoneType : BaseConfirmOTP
     {
         public ConfirmUserPhoneType(CustomUserManager userManager,
-            IGenericRepository<Domain.Entities.OTP> OTPRepo,
-            IGenericRepository<Domain.Entities.User> userRepo) : base(userManager, OTPRepo, userRepo)
+            IUserRepository<Domain.Entities.OTP> OTPRepo,
+            IUserRepository<Domain.Entities.User> userRepo) : base(userManager, OTPRepo, userRepo)
         {
         }
 

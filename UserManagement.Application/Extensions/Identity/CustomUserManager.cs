@@ -3,13 +3,14 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Identity
 {
     public class CustomUserManager : UserManager<User>
     {
-        private readonly IGenericRepository<Role> _roleRepo;
+        private readonly IUserRepository<Role> _roleRepo;
         private readonly IMapper _mapper;
 
         public CustomUserManager(
@@ -22,7 +23,7 @@ namespace UserManagement.Application.Identity
             IdentityErrorDescriber errors,
             IServiceProvider services,
             ILogger<UserManager<User>> logger,
-            IGenericRepository<Role> roleRepo,
+            IUserRepository<Role> roleRepo,
             IMapper mapper)
             : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {

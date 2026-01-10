@@ -5,16 +5,17 @@ using IdentityHelper.Abstraction;
 using ImageKitFileManager.Abstractions;
 using ImageKitFileManager.Enums;
 using UserManagement.Application.Specifications.RefundProof;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Commands.AddRefundProofImg
 {
     internal class AddRefundProofImgCommandHandler : ICommandHandler<AddRefundProofImgCommand, string>
     {
-        private readonly IGenericRepository<Domain.Entities.RefundProof> _refundProofRepo;
-        private readonly IGenericRepository<Domain.Entities.WalletTransaction> _walletTransaction;
+        private readonly IUserRepository<Domain.Entities.RefundProof> _refundProofRepo;
+        private readonly IUserRepository<Domain.Entities.WalletTransaction> _walletTransaction;
 
         private readonly IImageKitService _imageKitService;
-        public AddRefundProofImgCommandHandler(IGenericRepository<Domain.Entities.RefundProof> refundProofRepo, IImageKitService imageKitService , IGenericRepository<Domain.Entities.WalletTransaction> walletTransaction)
+        public AddRefundProofImgCommandHandler(IUserRepository<Domain.Entities.RefundProof> refundProofRepo, IImageKitService imageKitService , IUserRepository<Domain.Entities.WalletTransaction> walletTransaction)
         {
             _refundProofRepo = refundProofRepo;
             _imageKitService = imageKitService;

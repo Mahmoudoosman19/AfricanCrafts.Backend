@@ -3,17 +3,18 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using MediatR;
 using UserManagement.Application.Features.Wallet.Command.AddTransaction;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Wallet.Command.DistributeProfitShare
 {
     internal class DistributeProfitShareHandler(
-        IGenericRepository<Domain.Entities.MetaData> metaRepo,
-        IGenericRepository<Domain.Entities.User> userRepo,
+        IUserRepository<Domain.Entities.MetaData> metaRepo,
+        IUserRepository<Domain.Entities.User> userRepo,
         ISender sender) : IQueryHandler<DistributeProfitShareCommand, bool>
     {
-        private readonly IGenericRepository<Domain.Entities.MetaData> _metaRepo = metaRepo;
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo = userRepo;
+        private readonly IUserRepository<Domain.Entities.MetaData> _metaRepo = metaRepo;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo = userRepo;
         private readonly ISender _sender = sender;
 
         public async Task<ResponseModel<bool>> Handle(

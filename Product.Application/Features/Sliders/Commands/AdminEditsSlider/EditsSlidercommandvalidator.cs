@@ -1,13 +1,14 @@
 ﻿using Product.Application.Helpers;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Sliders.Commands.AdminEditsSlider
 {
     internal class EditsSlidercommandvalidator: AbstractValidator<EditsSlidercommand>
     {
-        private readonly IGenericRepository<Slider> _sliderRepo;
-        private readonly IGenericRepository<Category> _categoryRepo;    
-        public EditsSlidercommandvalidator(IGenericRepository<Slider> sliderRepo, IGenericRepository<Category> categoryRepo)
+        private readonly IProductRepository<Slider> _sliderRepo;
+        private readonly IProductRepository<Category> _categoryRepo;    
+        public EditsSlidercommandvalidator(IProductRepository<Slider> sliderRepo, IProductRepository<Category> categoryRepo)
         {
             _sliderRepo = sliderRepo;
             _categoryRepo = categoryRepo;

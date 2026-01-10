@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using UserManagement.Application.Abstractions;
 using UserManagement.Application.Specifications.RolePermission;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Options;
 
@@ -14,12 +15,12 @@ namespace UserManagement.Infrastructure.Authentication;
 internal sealed class JwtProvider : IJwtProvider
 {
     private readonly JwtOptions _options;
-    private readonly IGenericRepository<Role> _roleRepo;
-    private readonly IGenericRepository<RolePermission> _rolePermissionRepo;
+    private readonly IUserRepository<Role> _roleRepo;
+    private readonly IUserRepository<RolePermission> _rolePermissionRepo;
 
     public JwtProvider(IOptions<JwtOptions> options,
-        IGenericRepository<Role> roleRepo,
-        IGenericRepository<RolePermission> rolePermissionRepo)
+        IUserRepository<Role> roleRepo,
+        IUserRepository<RolePermission> rolePermissionRepo)
     {
         _options = options.Value;
         _roleRepo = roleRepo;

@@ -2,15 +2,16 @@
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Auth.Commands.ChangeUserEmail
 {
     internal class ChangeUserEmailCommandHandler : ICommandHandler<ChangeUserEmailCommand>
     {
         private readonly ITokenExtractor _tokenExtractor;
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo;
         private readonly CustomUserManager _userManager;
-        public ChangeUserEmailCommandHandler(ITokenExtractor tokenExtractor, IGenericRepository<Domain.Entities.User> userRepo, CustomUserManager userManager)
+        public ChangeUserEmailCommandHandler(ITokenExtractor tokenExtractor, IUserRepository<Domain.Entities.User> userRepo, CustomUserManager userManager)
         {
             _tokenExtractor = tokenExtractor;
             _userRepo = userRepo;

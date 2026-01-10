@@ -1,9 +1,11 @@
-﻿namespace Product.Application.Features.Advertisement.Command.ManageAdvertisementActivation
+﻿using Product.Domain.Abstraction;
+
+namespace Product.Application.Features.Advertisement.Command.ManageAdvertisementActivation
 {
     public class ManageAdvertisementActivationValidator : AbstractValidator<ManageAdvertisementActivationCommand>
     {
         private readonly IGenericRepository<Domain.Entities.Advertisement> _advertisementRepository;
-        public ManageAdvertisementActivationValidator(IGenericRepository<Domain.Entities.Advertisement> repository)
+        public ManageAdvertisementActivationValidator(IProductRepository<Domain.Entities.Advertisement> repository)
         {
             _advertisementRepository = repository;
             RuleFor(x => x.Id)

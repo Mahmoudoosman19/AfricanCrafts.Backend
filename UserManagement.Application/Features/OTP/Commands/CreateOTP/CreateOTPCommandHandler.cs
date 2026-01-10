@@ -4,6 +4,7 @@ using Common.Domain.Shared;
 using Microsoft.Extensions.Options;
 using UserManagement.Application.Abstractions;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Options;
 
 namespace UserManagement.Application.Features.OTP.Commands.CreateOTP
@@ -11,12 +12,12 @@ namespace UserManagement.Application.Features.OTP.Commands.CreateOTP
     internal class CreateOTPCommandHandler : ICommandHandler<CreateOTPCommand>
     {
         private readonly OTPOptions _otpOptions;
-        private readonly IGenericRepository<Domain.Entities.User> _userRepo;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository<Domain.Entities.User> _userRepo;
+        private readonly IUserUnitOfWork _unitOfWork;
         private readonly IEmailService _emailService;
 
-        public CreateOTPCommandHandler(IOptions<OTPOptions> otpOptions, IGenericRepository<Domain.Entities.User> userRepo,
-                                       IUnitOfWork unitOfWork,
+        public CreateOTPCommandHandler(IOptions<OTPOptions> otpOptions, IUserRepository<Domain.Entities.User> userRepo,
+                                       IUserUnitOfWork unitOfWork,
                                        IEmailService emailService)
         {
             _userRepo = userRepo;

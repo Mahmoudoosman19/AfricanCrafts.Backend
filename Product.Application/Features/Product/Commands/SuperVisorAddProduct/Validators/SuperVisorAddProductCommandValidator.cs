@@ -1,19 +1,20 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Features.Product.Commands.AddProduct.Validators;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.SuperVisorAddProduct.Validators;
 
 internal class SuperVisorAddProductCommandValidator : AbstractValidator<SuperVisorAddProductCommand>
 {
-    private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+    private readonly IProductRepository<Domain.Entities.Product> _productRepo;
 
     public SuperVisorAddProductCommandValidator(
-        IGenericRepository<Domain.Entities.Product> productRepo,
-        IGenericRepository<Category> categoryRepo,
-        IGenericRepository<Domain.Entities.Color> colorRepo,
-        IGenericRepository<Size> sizeRepo,
+        IProductRepository<Domain.Entities.Product> productRepo,
+        IProductRepository<Category> categoryRepo,
+        IProductRepository<Domain.Entities.Color> colorRepo,
+        IProductRepository<Size> sizeRepo,
         IUserManagement userManager)
     {
         _productRepo = productRepo;
@@ -22,14 +23,7 @@ internal class SuperVisorAddProductCommandValidator : AbstractValidator<SuperVis
             .MustAsync(IsProductUnique).WithMessage(Messages.RedundantData);
         RuleFor(product => product)
          .MustAsync(IsProductCodeUnique).WithMessage(Messages.RedundantData);
-        RuleFor(product => product.VendorId)
-            .MustAsync(async (vendorId, _)
-                =>
-            {
-                var vendor = await userManager.GetUserData(vendorId);
-                return vendor != null && vendor.Role == "Vendor";
-            })
-            .WithMessage(Messages.NotFound);
+       
 
         RuleFor(product => product.NameAr)
             .NotEmpty().WithMessage(Messages.EmptyField)

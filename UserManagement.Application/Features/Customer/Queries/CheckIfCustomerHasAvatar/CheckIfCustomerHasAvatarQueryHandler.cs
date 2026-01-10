@@ -4,15 +4,16 @@ using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using MapsterMapper;
 using UserManagement.Application.Specifications.Customer;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Queries.CheckIfCustomerHasAvatar
 {
     internal class CheckIfCustomerHasAvatarQueryHandler : IQueryHandler<CheckIfCustomerHasAvatarQuery, CheckIfCustomerHasAvatarQueryResponse>
     {
-        private readonly IGenericRepository<Domain.Entities.Customer> _customerRepo;
+        private readonly IUserRepository<Domain.Entities.Customer> _customerRepo;
         private readonly ITokenExtractor _tokenExtractor;
         private readonly IMapper _mapper;
-        public CheckIfCustomerHasAvatarQueryHandler(ITokenExtractor tokenExtractor, IGenericRepository<Domain.Entities.Customer> customerRepo, IMapper mapper)
+        public CheckIfCustomerHasAvatarQueryHandler(ITokenExtractor tokenExtractor, IUserRepository<Domain.Entities.Customer> customerRepo, IMapper mapper)
         {
             _tokenExtractor = tokenExtractor;
             _customerRepo = customerRepo;

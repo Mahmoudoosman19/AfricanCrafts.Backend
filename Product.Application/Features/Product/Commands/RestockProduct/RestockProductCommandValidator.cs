@@ -1,3 +1,4 @@
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.RestockProduct
@@ -6,7 +7,7 @@ namespace Product.Application.Features.Product.Commands.RestockProduct
     {
 
         public RestockProductCommandValidator(
-            IGenericRepository<ProductExtension> productextensionRepo)
+            IProductRepository<ProductExtension> productextensionRepo)
         {
             RuleFor(x => x.ProductExtensionId)
             .NotEmpty()

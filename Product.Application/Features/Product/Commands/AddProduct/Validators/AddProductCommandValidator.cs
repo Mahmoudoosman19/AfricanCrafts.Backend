@@ -1,19 +1,20 @@
 ﻿using IdentityHelper.Abstraction;
 using Product.Application.Specifications.Products;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.AddProduct.Validators
 {
     internal class AddProductCommandValidator : AbstractValidator<AddProductCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Product> _productRepo;
+        private readonly IProductRepository<Domain.Entities.Product> _productRepo;
         private readonly ITokenExtractor _userManager;
 
         public AddProductCommandValidator(
-            IGenericRepository<Domain.Entities.Product> productRepo,
-            IGenericRepository<Category> categoryRepo,
-            IGenericRepository<Domain.Entities.Color> colorRepo,
-            IGenericRepository<Size> sizeRepo,
+            IProductRepository<Domain.Entities.Product> productRepo,
+            IProductRepository<Category> categoryRepo,
+            IProductRepository<Domain.Entities.Color> colorRepo,
+            IProductRepository<Size> sizeRepo,
             ITokenExtractor userManager)
         {
             _productRepo = productRepo;

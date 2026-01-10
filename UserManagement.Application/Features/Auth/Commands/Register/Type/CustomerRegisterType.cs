@@ -3,6 +3,7 @@ using Common.Domain.Shared;
 using MapsterMapper;
 using UserManagement.Application.Features.Auth.Commands.Register.Abstract;
 using UserManagement.Application.Specifications.Role;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Auth.Commands.Register.Type
@@ -12,7 +13,7 @@ namespace UserManagement.Application.Features.Auth.Commands.Register.Type
         public CustomerRegisterType(
             IMapper mapper,
             CustomUserManager userManager,
-            IGenericRepository<Role> roleRepo)
+            IUserRepository<Role> roleRepo)
             : base(
                   mapper,
                   userManager,

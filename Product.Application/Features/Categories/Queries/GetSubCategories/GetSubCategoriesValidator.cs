@@ -1,4 +1,5 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetSubCategories;
 
@@ -6,7 +7,7 @@ internal class GetSubCategoriesValidator : AbstractValidator<GetSubCategoriesQue
 {
 
     public GetSubCategoriesValidator(
-        IGenericRepository<Category> categoryRepo)
+        IProductRepository<Category> categoryRepo)
     {
         RuleFor(c => c.Id)
             .NotNull().WithMessage(Messages.EmptyField)

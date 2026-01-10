@@ -2,15 +2,16 @@
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Customer.Commands.CustomerEditAddressById
 {
     public class EditAddressByIdCommandHandler : ICommandHandler<EditAddressByIdCommand>
     {
-        private readonly IGenericRepository<Address> _addressRepo;
+        private readonly IUserRepository<Address> _addressRepo;
         private readonly ITokenExtractor _tokenExtractor;
 
-        public EditAddressByIdCommandHandler(IGenericRepository<Address> addressRepo, ITokenExtractor tokenExtractor)
+        public EditAddressByIdCommandHandler(IUserRepository<Address> addressRepo, ITokenExtractor tokenExtractor)
         {
             _addressRepo = addressRepo;
             _tokenExtractor = tokenExtractor;

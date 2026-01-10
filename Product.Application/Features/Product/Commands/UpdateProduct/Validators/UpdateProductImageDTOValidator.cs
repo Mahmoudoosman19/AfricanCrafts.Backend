@@ -1,11 +1,12 @@
 ﻿using Product.Application.Features.Product.Commands.UpdateProduct.DTOs;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Product.Commands.UpdateProduct.Validators
 {
     internal class UpdateProductImageDTOValidator : AbstractValidator<UpdateProductImageDTO>
     {
-        public UpdateProductImageDTOValidator(IGenericRepository<ProductImage> productImageRepo, IGenericRepository<Domain.Entities.Color> colorRepo)
+        public UpdateProductImageDTOValidator(IProductRepository<ProductImage> productImageRepo, IProductRepository<Domain.Entities.Color> colorRepo)
         {
             When(img => img.Id != Guid.Empty, () =>
             {

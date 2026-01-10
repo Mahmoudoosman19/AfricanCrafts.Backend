@@ -1,13 +1,14 @@
 ﻿using Common.Application.Abstractions.Messaging;
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.User.Commands.DeleteUser
 {
     public class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.User> _userRepository;
-        public DeleteUserCommandHandler(IGenericRepository<Domain.Entities.User> userRepository)
+        private readonly IUserRepository<Domain.Entities.User> _userRepository;
+        public DeleteUserCommandHandler(IUserRepository<Domain.Entities.User> userRepository)
         {
             _userRepository = userRepository;
         }

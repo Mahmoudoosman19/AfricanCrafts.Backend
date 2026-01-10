@@ -3,14 +3,15 @@ using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using MapsterMapper;
 using UserManagement.Application.Specifications.Wallet;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Wallet.Queries.GetAdminWalletTransactions
 {
     internal class GetAdminWalletTransactionsQueryHandler : IQueryHandler<GetAdminWalletTransactionsQuery, IEnumerable<GetAdminWalletTransactionsQueryResponse>>
     {
-        private readonly IGenericRepository<WalletTransaction> _walletTransactionRepo;
+        private readonly IUserRepository<WalletTransaction> _walletTransactionRepo;
         private readonly IMapper _mapper;
-        public GetAdminWalletTransactionsQueryHandler(IGenericRepository<WalletTransaction> walletTransactionRepo, IMapper mapper)
+        public GetAdminWalletTransactionsQueryHandler(IUserRepository<WalletTransaction> walletTransactionRepo, IMapper mapper)
         {
             _walletTransactionRepo = walletTransactionRepo;
             _mapper = mapper;

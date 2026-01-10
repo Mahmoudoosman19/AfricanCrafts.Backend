@@ -5,19 +5,20 @@ using MapsterMapper;
 using UserManagement.Application.DTOs;
 using UserManagement.Application.Specifications.Role;
 using UserManagement.Application.Specifications.Supervisor;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Supervisor.Queries.GetSupervisorByNameAndStatusAndRoleId
 {
     internal class GetSupervisorByNameAndStatusAndRoleIdQueryHandler : IQueryHandler<GetSupervisorByNameAndStatusAndRoleIdQuery, IReadOnlyList<UserDto>>
     {
-        private readonly IGenericRepository<Domain.Entities.User> _supervisorRepo;
-        private readonly IGenericRepository<Role> _roleRepo;
+        private readonly IUserRepository<Domain.Entities.User> _supervisorRepo;
+        private readonly IUserRepository<Role> _roleRepo;
         private readonly IMapper _mapper;
         private readonly CustomUserManager _userManager;
 
         public GetSupervisorByNameAndStatusAndRoleIdQueryHandler(IMapper mapper, CustomUserManager userManager,
-            IGenericRepository<Domain.Entities.User> supervisorRepo, IGenericRepository<Role> roleRepo)
+            IUserRepository<Domain.Entities.User> supervisorRepo, IUserRepository<Role> roleRepo)
         {
             _mapper = mapper;
             _userManager = userManager;

@@ -1,11 +1,12 @@
-﻿using Product.Domain.Entities;
+﻿using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Queries.GetOneCategroy
 {
     internal class GetCategoryByIdQueryValidator : AbstractValidator<GetCategoryByIdWithSizeGroupAndParentCategoryQuery>
     {
         public GetCategoryByIdQueryValidator(
-       IGenericRepository<Category> CategoryRepo)
+       IProductRepository<Category> CategoryRepo)
         {
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage(Messages.EmptyField)

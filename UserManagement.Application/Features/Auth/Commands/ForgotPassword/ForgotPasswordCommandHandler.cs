@@ -2,15 +2,16 @@ using Common.Application.Abstractions.Messaging;
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Auth.Commands.ForgotPassword;
 
 public class ForgotPasswordCommandHandler : ICommandHandler<ForgotPasswordCommand>
 {
     private readonly CustomUserManager _userManager;
-    private readonly IUnitOfWork _uow;
+    private readonly IUserUnitOfWork _uow;
 
-    public ForgotPasswordCommandHandler(CustomUserManager userManager, IUnitOfWork uow)
+    public ForgotPasswordCommandHandler(CustomUserManager userManager, IUserUnitOfWork uow)
     {
         _userManager = userManager;
         _uow = uow;

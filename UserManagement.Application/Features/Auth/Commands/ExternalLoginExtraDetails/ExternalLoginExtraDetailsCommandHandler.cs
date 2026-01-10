@@ -6,6 +6,7 @@ using MapsterMapper;
 using UserManagement.Application.Abstractions;
 using UserManagement.Application.DTOs;
 using UserManagement.Application.Features.Auth.Commands.Login;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Enums;
 
 namespace UserManagement.Application.Features.Auth.Commands.ExternalLoginExtraDetails;
@@ -13,12 +14,12 @@ namespace UserManagement.Application.Features.Auth.Commands.ExternalLoginExtraDe
 public class ExternalLoginExtraDetailsCommandHandler : ICommandHandler<ExternalLoginExtraDetailsCommand, LoginCommandResponse>
 {
     private readonly CustomUserManager _userManager;
-    private readonly IGenericRepository<Domain.Entities.User> _userRepo;
+    private readonly IUserRepository<Domain.Entities.User> _userRepo;
     private readonly IJwtProvider _jwtProvider;
     private readonly IMapper _mapper;
     private readonly ITokenExtractor _currentUser;
 
-    public ExternalLoginExtraDetailsCommandHandler(CustomUserManager userManager, IGenericRepository<Domain.Entities.User> userRepo, IJwtProvider jwtProvider, IMapper mapper, ITokenExtractor currentUser)
+    public ExternalLoginExtraDetailsCommandHandler(CustomUserManager userManager, IUserRepository<Domain.Entities.User> userRepo, IJwtProvider jwtProvider, IMapper mapper, ITokenExtractor currentUser)
     {
         _userManager = userManager;
         _userRepo = userRepo;

@@ -3,17 +3,18 @@ using Microsoft.Extensions.Configuration;
 using System.Security.Cryptography;
 using UserManagement.Application.Abstractions;
 using UserManagement.Application.Specifications.RefreshToken;
+using UserManagement.Domain.Abstraction;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.Services
 {
     internal class RefreshTokenService : IRefreshTokenService
     {
-        private readonly IGenericRepository<RefreshToken> _refreshTokenRepo;
+        private readonly IUserRepository<RefreshToken> _refreshTokenRepo;
         private readonly IConfiguration _configuration;
         private readonly IJwtProvider _jwtProvider;
 
-        public RefreshTokenService(IGenericRepository<RefreshToken> refreshTokenRepo,
+        public RefreshTokenService(IUserRepository<RefreshToken> refreshTokenRepo,
             IConfiguration configuration, IJwtProvider jwtProvider)
         {
             _refreshTokenRepo = refreshTokenRepo;

@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure;
 
 public static class Bootstrap
 {
-    public static async Task<IServiceCollection> AddInfrastructureStrapping(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureStrapping(this IServiceCollection services)
     {
         services.AddLocalization();
 
@@ -32,7 +32,6 @@ public static class Bootstrap
             };
         });
 
-         services.AddDBSeederExtension();
 
         return services;
     }

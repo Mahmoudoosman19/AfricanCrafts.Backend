@@ -2,14 +2,15 @@
 using Common.Domain.Repositories;
 using Common.Domain.Shared;
 using MapsterMapper;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Notifications.Command.CreateNotification
 {
     internal class CreateNotificationsCommandHandler : ICommandHandler<CreateNotificationsCommand>
     {
-        private readonly IGenericRepository<Domain.Entities.Notifications> _notificationsRepository;
+        private readonly IUserRepository<Domain.Entities.Notifications> _notificationsRepository;
         private readonly IMapper _mapper;
-        public CreateNotificationsCommandHandler(IGenericRepository<Domain.Entities.Notifications> notificationsRepository, IMapper mapper)
+        public CreateNotificationsCommandHandler(IUserRepository<Domain.Entities.Notifications> notificationsRepository, IMapper mapper)
         {
             _notificationsRepository = notificationsRepository;
             _mapper = mapper;

@@ -46,7 +46,7 @@ public sealed class CategoryController : ApiController
         return HandleResult(response);
     }
 
-    [HttpPost("update-category")]
+    [HttpPut("update-category")]
     public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryCommand updatedCategory, CancellationToken cancellationToken)
     {
         var response = await Sender.Send(updatedCategory);

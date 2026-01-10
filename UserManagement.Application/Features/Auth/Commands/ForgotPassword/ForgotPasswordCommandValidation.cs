@@ -1,5 +1,6 @@
 using Common.Domain.Repositories;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Auth.Commands.ForgotPassword;
 
@@ -7,10 +8,10 @@ public class ForgotPasswordCommandValidation
     : AbstractValidator<ForgotPasswordCommand>
 {
     private readonly CustomUserManager _userManager;
-    private readonly IGenericRepository<Domain.Entities.User> _userRepo;
+    private readonly IUserRepository<Domain.Entities.User> _userRepo;
     private Domain.Entities.User? _user;
     
-    public ForgotPasswordCommandValidation(CustomUserManager userManager, IGenericRepository<Domain.Entities.User> userRepo)
+    public ForgotPasswordCommandValidation(CustomUserManager userManager, IUserRepository<Domain.Entities.User> userRepo)
     {
         _userManager = userManager;
         _userRepo = userRepo;

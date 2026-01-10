@@ -1,13 +1,14 @@
 ﻿using Product.Application.Helpers;
+using Product.Domain.Abstraction;
 using Product.Domain.Entities;
 
 namespace Product.Application.Features.Categories.Commands.UpdateCategory
 {
     public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
     {
-        private readonly IGenericRepository<Category> _categoryRepo;
-        private readonly IGenericRepository<SizeGroup> _sizeGroupRepo;
-        public UpdateCategoryCommandValidator(IGenericRepository<Category> categoryRepo, IGenericRepository<SizeGroup> sizeGroupRepo)
+        private readonly IProductRepository<Category> _categoryRepo;
+        private readonly IProductRepository<SizeGroup> _sizeGroupRepo;
+        public UpdateCategoryCommandValidator(IProductRepository<Category> categoryRepo, IProductRepository<SizeGroup> sizeGroupRepo)
         {
             _categoryRepo = categoryRepo;
             _sizeGroupRepo = sizeGroupRepo;

@@ -4,6 +4,7 @@ using Common.Domain.Shared;
 using IdentityHelper.Abstraction;
 using MapsterMapper;
 using UserManagement.Application.Specifications.User;
+using UserManagement.Domain.Abstraction;
 
 namespace UserManagement.Application.Features.Auth.DashboardRole
 {
@@ -11,9 +12,9 @@ namespace UserManagement.Application.Features.Auth.DashboardRole
     {
         private readonly ITokenExtractor _tokenExtractor;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserUnitOfWork _unitOfWork;
 
-        public DashboardRoleQueryHandler(ITokenExtractor tokenExtractor, IMapper mapper, IUnitOfWork unitOfWork)
+        public DashboardRoleQueryHandler(ITokenExtractor tokenExtractor, IMapper mapper, IUserUnitOfWork unitOfWork)
         {
             _tokenExtractor = tokenExtractor;
             _mapper = mapper;

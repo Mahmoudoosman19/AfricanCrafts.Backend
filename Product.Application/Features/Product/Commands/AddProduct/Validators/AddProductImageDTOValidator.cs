@@ -1,10 +1,11 @@
 ﻿using Product.Application.Features.Product.Commands.AddProduct.DTOs;
+using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Commands.AddProduct.Validators
 {
     internal class AddProductImageDTOValidator : AbstractValidator<AddProductImageDTO>
     {
-        public AddProductImageDTOValidator(IGenericRepository<Domain.Entities.Color> colorRepo)
+        public AddProductImageDTOValidator(IProductRepository<Domain.Entities.Color> colorRepo)
         {
             RuleFor(img => img.ImageFile)
                    .NotNull().WithMessage(Messages.EmptyField);

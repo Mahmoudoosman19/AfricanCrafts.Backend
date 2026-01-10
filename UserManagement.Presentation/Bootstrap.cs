@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UserManagement.Application;
 using UserManagement.Infrastructure;
+using UserManagement.Infrastructure.Seeders;
 using UserManagement.Persistence;
 using UserManagement.Presentation.Configurations;
 using UserManagement.Presentation.Extensions;
@@ -15,7 +16,7 @@ namespace UserManagement.Presentation
 {
     public static class Bootstrap
     {
-        public static async Task<IServiceCollection> AddUserManagerStrapping(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddUserManagerStrapping(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddDbConfig(configuration);
             services.AddAppServicesDIConfig();
@@ -25,6 +26,8 @@ namespace UserManagement.Presentation
             services.AddInfrastructureStrapping();
 
             services.AddIdentityServices(configuration);
+            services.AddDBSeederExtension();
+
             return services;
         }
     }
