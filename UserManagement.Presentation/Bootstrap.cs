@@ -11,6 +11,7 @@ using UserManagement.Infrastructure.Seeders;
 using UserManagement.Persistence;
 using UserManagement.Presentation.Configurations;
 using UserManagement.Presentation.Extensions;
+using UserManagement.Presentation.OptionsSetup;
 
 namespace UserManagement.Presentation
 {
@@ -18,6 +19,9 @@ namespace UserManagement.Presentation
     {
         public static IServiceCollection AddUserManagerStrapping(this IServiceCollection services,IConfiguration configuration)
         {
+            services.ConfigureOptions<JwtOptionsSetup>();
+            services.ConfigureOptions<OTPOptionsSetup>();
+
             services.AddDbConfig(configuration);
             services.AddAppServicesDIConfig();
 

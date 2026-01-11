@@ -10,15 +10,21 @@ namespace UserManagement.Application.Features.Auth.Commands.Register.Type
 {
     internal class CustomerRegisterType : BaseRegister
     {
+        private readonly IUserRepository<Domain.Entities.Customer> _customerRepo;
+
         public CustomerRegisterType(
             IMapper mapper,
             CustomUserManager userManager,
-            IUserRepository<Role> roleRepo)
+            IUserRepository<Role> roleRepo,
+            IUserRepository<Domain.Entities.Customer> customerRepo
+            )
             : base(
                   mapper,
                   userManager,
                   roleRepo)
-        { }
+        {
+            _customerRepo = customerRepo;
+        }
 
         public override RegisterType Type { get; set; } = RegisterType.Customer;
 
@@ -32,6 +38,7 @@ namespace UserManagement.Application.Features.Auth.Commands.Register.Type
             user.ConfirmEmail();
             user.ConfirmPhoneNumber();
             var result = await _userManager.CreateAsync(user, registerDto.Customer!.Password);
+            
             if (!result.Succeeded)
             {
                 var errors = string.Join(Environment.NewLine,
