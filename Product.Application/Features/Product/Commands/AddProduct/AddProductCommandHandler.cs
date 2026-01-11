@@ -38,8 +38,7 @@ internal class AddProductCommandHandler : ICommandHandler<AddProductCommand, str
         List<string> roles = new List<string>
         {
           "Admin",
-          "SuperVisor",
-          "Vendor"
+          "Supervisor"
         };
         List<string> replaceValue = new List<string>
         {

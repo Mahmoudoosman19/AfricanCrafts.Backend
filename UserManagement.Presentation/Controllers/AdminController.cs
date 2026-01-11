@@ -1,5 +1,6 @@
 ﻿using Common.Presentation.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Application.Features.Auth.Commands.Register;
 using UserManagement.Application.Features.Auth.Commands.Register.Abstract;
@@ -18,8 +19,8 @@ using UserManagement.Application.Features.User.Queries.GetUsersData;
 
 namespace UserManagement.Presentation.Controllers
 {
-
     [Route("api/UserManagement/[controller]")]
+    [Authorize(Policy = "DynamicPermission")]
     public sealed class AdminController : ApiController
     {
         public AdminController(ISender sender) : base(sender)
@@ -40,6 +41,7 @@ namespace UserManagement.Presentation.Controllers
             var result = await Sender.Send(query);
             return HandleResult(result);
         }
+
         [HttpGet("get-list-suprvisor")]
         public async Task<IActionResult> GetListSupervisor([FromQuery] GetSupervisorByNameAndStatusAndRoleIdQuery query)
         {

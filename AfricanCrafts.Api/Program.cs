@@ -1,12 +1,15 @@
 
+using AfricanCrafts.Api.Helpers;
 using AfricanCrafts.Api.Middlewares;
 using CacheHelper;
 using IdentityHelper.BI;
 using ImageKitFileManager;
 using LoggerHelper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Product.Presentation;
 using Serilog;
+using System.IdentityModel.Tokens.Jwt;
 using UserManagement.Infrastructure.Seeders;
 using UserManagement.Persistence;
 using UserManagement.Presentation;
@@ -17,10 +20,10 @@ namespace AfricanCrafts.Api
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            // Add Services
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddHttpClient();
 
@@ -37,9 +40,7 @@ namespace AfricanCrafts.Api
             builder.Services.AddCors();
             builder.Host.UseSerilog();
 
-           
-            
-
+        
 
             // Add Controllers
             builder.Services.AddControllers()
@@ -54,10 +55,20 @@ namespace AfricanCrafts.Api
             builder.Services.AddExceptionHandler<GlobalExceptionHandlerMiddleware>();
             builder.Services.AddProblemDetails();
 
+            builder.Services.AddSingleton<IAuthorizationHandler, DynamicActionPermissionHandler>();
+
+            // 3. Define Policy
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DynamicPermission", policy =>
+                {
+                    policy.RequireAuthenticatedUser(); 
+                    policy.AddRequirements(new DynamicActionPermissionRequirement());
+                });
+            });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSerilogRequestLogging();
@@ -67,26 +78,30 @@ namespace AfricanCrafts.Api
             }
 
             app.UseHttpsRedirection();
-
             app.UseCors(corsBuilder =>
-            corsBuilder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader());
-            app.UseAuthorization();
+                corsBuilder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
 
+
+            app.UseRouting();
+
+
+
+            app.UseMiddleware<ActionPermissionMiddleware>();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
             #region Update Database
             using var scope = app.Services.CreateScope();
             var service = scope.ServiceProvider;
-
             var userContext = service.GetRequiredService<UserManagementDbContext>();
-
             var loggerFactory = service.GetRequiredService<ILoggerFactory>();
             try
             {
-                 userContext.Database.Migrate();
+                userContext.Database.Migrate();
             }
             catch (Exception ex)
             {
@@ -94,6 +109,7 @@ namespace AfricanCrafts.Api
                 logger.LogError(ex, "An error occured while updating database!");
             }
             #endregion
+
             app.Run();
         }
     }

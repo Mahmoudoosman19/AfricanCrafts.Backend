@@ -14,7 +14,7 @@ namespace UserManagement.Application.Features.Auth.Commands.Register.Base
         {
             var register = _baseRegisters.FirstOrDefault(r => r.Type == type);
 
-            return register!;
+            return register! ?? throw new NotImplementedException($"No registration logic found for {type}");
         }
     }
 }
