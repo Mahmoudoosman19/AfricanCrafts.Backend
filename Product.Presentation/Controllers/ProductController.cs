@@ -45,7 +45,7 @@ namespace Product.Presentation.Controllers
         }
 
         [HttpGet("get-products")]
-        public async Task<IActionResult> Get([FromQuery] GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get([FromQuery] GetProductsByStatusAndProductCodeAndNameWithImageQuery query, CancellationToken cancellationToken)
         {
             var result = await Sender.Send(query, cancellationToken);
 

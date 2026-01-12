@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Product.Domain.Abstraction
 {
-    public interface IProductUnitOfWork : IUnitOfWork
+    public interface IProductUnitOfWork : IOrderUnitOfWork
     {
     }
 }

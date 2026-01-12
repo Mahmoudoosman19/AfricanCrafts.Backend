@@ -5,7 +5,7 @@ namespace Product.Application.Specifications.Products
 {
     internal sealed class GetProductsByStatusAndProductCodeAndNameWithImageSpecification : Specification<Domain.Entities.Product>
     {
-        public GetProductsByStatusAndProductCodeAndNameWithImageSpecification(GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery query,
+        public GetProductsByStatusAndProductCodeAndNameWithImageSpecification(GetProductsByStatusAndProductCodeAndNameWithImageQuery query,
             Guid userId, string role)
         {
             ApplyPaging(query.PageSize, query.PageIndex);

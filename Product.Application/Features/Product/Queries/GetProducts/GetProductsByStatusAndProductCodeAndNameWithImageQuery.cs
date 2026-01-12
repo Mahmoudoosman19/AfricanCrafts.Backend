@@ -1,6 +1,6 @@
 ﻿namespace Product.Application.Features.Product.Queries.GetProducts
 {
-    public sealed record GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery : IQuery<IReadOnlyList<ProductQueryResponse>>
+    public sealed record GetProductsByStatusAndProductCodeAndNameWithImageQuery : IQuery<IReadOnlyList<ProductQueryResponse>>
     {
         public int PageSize { get; init; } = 20;
         public int PageIndex { get; init; } = 1;

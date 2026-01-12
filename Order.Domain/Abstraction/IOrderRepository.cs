@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserManagement.Domain.Abstraction
+namespace Order.Domain.Abstraction
 {
-    public interface IUserUnitOfWork : IOrderUnitOfWork
+    public interface IOrderRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
     }
 }
