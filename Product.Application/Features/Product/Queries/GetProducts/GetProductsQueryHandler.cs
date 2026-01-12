@@ -5,7 +5,7 @@ using Product.Domain.Abstraction;
 
 namespace Product.Application.Features.Product.Queries.GetProducts
 {
-    internal class GetProductsQueryHandler : IQueryHandler<GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery, IReadOnlyList<ProductQueryResponse>>
+    internal class GetProductsQueryHandler : IQueryHandler<GetProductsByStatusAndProductCodeAndNameWithImageQuery, IReadOnlyList<ProductQueryResponse>>
     {
         private readonly IProductRepository<Domain.Entities.Product> _productRepo;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Product.Application.Features.Product.Queries.GetProducts
             _mapper = mapper;
             _tokenExtractor = tokenExtractor;
         }
-        public async Task<ResponseModel<IReadOnlyList<ProductQueryResponse>>> Handle(GetProductsByStatusAndVendorIdAndProductCodeAndNameWithImageQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseModel<IReadOnlyList<ProductQueryResponse>>> Handle(GetProductsByStatusAndProductCodeAndNameWithImageQuery request, CancellationToken cancellationToken)
         {
             var userId = _tokenExtractor.GetUserId();
             var role = _tokenExtractor.GetUserRole();

@@ -7,6 +7,7 @@ using ImageKitFileManager;
 using LoggerHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Order.Presentation;
 using Product.Presentation;
 using Serilog;
 using System.IdentityModel.Tokens.Jwt;
@@ -31,8 +32,11 @@ namespace AfricanCrafts.Api
             builder.Services.AddProductStrapping(builder.Configuration);
             // Usermanagement Module Register 
             builder.Services.AddUserManagerStrapping(builder.Configuration);
+            // Order Module Registeration
+            builder.Services.AddOrderStrapping(builder.Configuration);
 
-            
+
+
 
             builder.Services.AddImageKitFileManagerConfig(builder.Configuration);
             builder.Services.AddIdentityHelper();
