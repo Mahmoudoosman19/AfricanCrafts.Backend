@@ -9,7 +9,7 @@ public static class Bootstrap
 {
     public static IServiceCollection AddPersistenceStrapping(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IGenericRepository<>), typeof(OrderRepository<>));
+        services.AddScoped(typeof(IOrderRepository<>), typeof(OrderRepository<>));
         services.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();
         services.AddScoped <IBasketRepository, BasketRepository>();
 
