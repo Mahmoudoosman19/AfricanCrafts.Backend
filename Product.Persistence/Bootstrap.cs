@@ -11,7 +11,6 @@ namespace Product.Persistence
         {
             services.AddScoped(typeof(IProductRepository<>), typeof(ProductRepository<>));
             services.AddScoped<IProductUnitOfWork, ProductUnitOfWork>();
-
             return services;
         }
     }

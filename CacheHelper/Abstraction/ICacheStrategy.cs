@@ -9,4 +9,5 @@ public interface ICacheStrategy
             bool forceUpdate = false);
     bool ContainsKey(string key);
     void Remove(string key);
+    Task RemoveByPrefixAsync(string prefixKey, CancellationToken cancellationToken = default);
 }

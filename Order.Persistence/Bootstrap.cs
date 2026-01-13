@@ -1,5 +1,6 @@
 ﻿using Common.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using Order.Domain.Abstraction;
 using Order.Persistence.Repositories;
 
 namespace Order.Persistence;
@@ -10,6 +11,7 @@ public static class Bootstrap
     {
         services.AddScoped(typeof(IGenericRepository<>), typeof(OrderRepository<>));
         services.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();
+        services.AddScoped <IBasketRepository, BasketRepository>();
 
         return services;
     }

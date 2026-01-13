@@ -1,40 +1,87 @@
-﻿//using CacheHelper.Abstraction;
-//using Newtonsoft.Json;
-//using StackExchange.Redis;
+﻿using CacheHelper.Abstraction;
+using CacheHelper.Keys;
+using Newtonsoft.Json;
+using StackExchange.Redis;
+using System.Collections.Concurrent;
 
-//namespace CacheHelper.Services
-//{
-//    public class RedisCacheService : ICacheStrategy
-//    {
-//        private readonly IConnectionMultiplexer _redisConnection;
+namespace CacheHelper.Services
+{
+    public class RedisCacheService : ICacheStrategy
+    {
+        private static ConcurrentDictionary<string, bool> CacheKeys = new();
+        private readonly IDatabase _database;
+        private readonly IConnectionMultiplexer _redis;
 
-//        public RedisCacheService(IConnectionMultiplexer redisConnection)
-//        {
-//            _redisConnection = redisConnection ?? throw new ArgumentNullException(nameof(redisConnection));
-//        }
+        public RedisCacheService(IConnectionMultiplexer redis)
+        {
+            _redis = redis;
+            _database = _redis.GetDatabase();
+        }
 
-//        public async Task<T?> GetOrSetCacheDataAsync<T>(string key, T data, TimeSpan? expiry = null, bool forceUpdate = false)
-//        {
-//            var database = _redisConnection.GetDatabase();
+        public async Task<T?> GetOrSetCacheDataAsync<T>(
+            string cacheKey,
+            Func<Task<T>>? initCache,
+            DateTime? expiration = null,
+            bool forceUpdate = false)
+        {
+            if (string.IsNullOrEmpty(cacheKey))
+                throw new ArgumentException("Cache key cannot be null or empty.", nameof(cacheKey));
 
-//            if (!forceUpdate)
-//            {
-//                var cachedData = await database.StringGetAsync(key);
+            if (!forceUpdate)
+            {
+                var cachedData = await _database.StringGetAsync(cacheKey);
+                if (cachedData.HasValue)
+                {
+                    return JsonConvert.DeserializeObject<T>(cachedData!);
+                }
+            }
 
-//                if (!cachedData.IsNullOrEmpty)
-//                {
-//                    return JsonConvert.DeserializeObject<T>(cachedData!);
-//                }
-//            }
+            T result = default;
+            if (initCache != null)
+            {
+                result = await initCache();
+            }
 
-//            if (data is not null)
-//            {
-//                await database.StringSetAsync(key, JsonConvert.SerializeObject(data), expiry);
-//                return data;
-//            }
+            if (result != null)
+            {
+                var serializedData = JsonConvert.SerializeObject(result);
 
-//            return default;
-//        }
+                TimeSpan? expiryTime = null;
+                if (expiration.HasValue)
+                {
+                    expiryTime = expiration.Value - DateTime.Now;
+                    if (expiryTime.Value.TotalSeconds <= 0) expiryTime = TimeSpan.FromMinutes(1);
+                }
 
-//    }
-//}
+                await _database.StringSetAsync(cacheKey, serializedData,expiryTime,When.Always);
+            }
+
+            return result;
+        }
+
+        public bool ContainsKey(string key)
+        {
+            return _database.KeyExists(key);
+        }
+
+        public void Remove(string key)
+        {
+            _database.KeyDelete(key);
+        }
+
+        public async Task RemoveByPrefixAsync(string prefixKey, CancellationToken cancellationToken = default)
+        {
+            foreach (var endpoint in _redis.GetEndPoints())
+            {
+                var server = _redis.GetServer(endpoint);
+
+                var keys = server.Keys(pattern: prefixKey + "*");
+
+                foreach (var key in keys)
+                {
+                    await _database.KeyDeleteAsync(key);
+                }
+            }
+        }
+    }
+}
