@@ -1,10 +1,12 @@
 ﻿using CacheHelper.Abstraction;
 using Microsoft.Extensions.Caching.Memory;
+using System.Collections.Concurrent;
 
 namespace CacheHelper.Services;
 
 public class MemoryCacheService : ICacheStrategy
 {
+    private static ConcurrentDictionary<string, bool> CacheKeys = new();
     private readonly IMemoryCache _memoryCache;
 
     public MemoryCacheService(IMemoryCache memoryCache)
@@ -50,8 +52,6 @@ public class MemoryCacheService : ICacheStrategy
         return result;
     }
 
-
-
     public bool ContainsKey(string key)
     {
         return _memoryCache.TryGetValue(key, out _);
@@ -60,5 +60,19 @@ public class MemoryCacheService : ICacheStrategy
     public void Remove(string key)
     {
         _memoryCache.Remove(key);
+    }
+
+    public async Task RemoveByPrefixAsync(string prefixKey, CancellationToken cancellationToken = default)
+    {
+        var keysToRemove = CacheKeys.Keys
+               .Where(k => k.StartsWith(prefixKey))
+               .ToList();
+
+        foreach (var key in keysToRemove)
+        {
+            Remove(key);
+        }
+
+        await Task.CompletedTask;
     }
 }

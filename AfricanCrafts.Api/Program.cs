@@ -30,21 +30,21 @@ namespace AfricanCrafts.Api
 
             // Product Module Register
             builder.Services.AddProductStrapping(builder.Configuration);
-            // Usermanagement Module Register 
-            builder.Services.AddUserManagerStrapping(builder.Configuration);
             // Order Module Registeration
             builder.Services.AddOrderStrapping(builder.Configuration);
+            // Usermanagement Module Register 
+            builder.Services.AddUserManagerStrapping(builder.Configuration);
 
 
 
 
             builder.Services.AddImageKitFileManagerConfig(builder.Configuration);
             builder.Services.AddIdentityHelper();
-            builder.Services.AddCacheHelperDI();
             builder.Services.AddCors();
             builder.Host.UseSerilog();
+            builder.Services.AddCacheBaseServices(builder.Configuration);
 
-        
+
 
             // Add Controllers
             builder.Services.AddControllers()

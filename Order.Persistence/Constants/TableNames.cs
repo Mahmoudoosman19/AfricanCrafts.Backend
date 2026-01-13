@@ -7,5 +7,6 @@ internal static class TableNames
     internal const string OrderStatus = nameof(OrderStatus);
     internal const string PaymentStatus = nameof(PaymentStatus);
     internal const string PaymentMethods = nameof(PaymentMethods);
-    internal const string PointsRange = nameof(PointsRange);
+    internal const string CustomerBasket = nameof(CustomerBasket);
+    internal const string BasketItem = nameof(BasketItem);
 }

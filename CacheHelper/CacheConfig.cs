@@ -3,16 +3,26 @@ using CacheHelper.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-
+using Microsoft.Extensions.Configuration;
 namespace CacheHelper
 {
     public static class CacheConfig
     {
-        public static IServiceCollection AddCacheHelperDI(this IServiceCollection services)
+        public static IServiceCollection AddCacheBaseServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMemoryCache();
-            services.AddSingleton<ICacheStrategy, MemoryCacheService>();
             services.AddScoped<CacheContext>();
+
+            var useRedisStr = configuration["CacheSettings:UseRedis"];
+            bool.TryParse(useRedisStr, out bool useRedis);
+            if (useRedis)
+            {
+                services.AddRedisConfig(configuration);
+            }
+            else
+            {
+                services.AddMemoryCacheStrategy();
+            }
 
             return services;
         }
@@ -21,19 +31,31 @@ namespace CacheHelper
         {
             ConfigurationOptions options = new ConfigurationOptions
             {
-                EndPoints = { { config["RedisConfig:Host"]!, int.Parse(config["RedisConfig:Port"]!) } },
-                User = config["RedisConfig:UserName"],
-                Password = config["RedisConfig:Password"],
+                EndPoints = { { config["RedisConfig:Host"] ?? "localhost", int.Parse(config["RedisConfig:Port"] ?? "6379") } },
+
+                Ssl = false,
+
                 AbortOnConnectFail = false,
-                Ssl = true,
-                SslProtocols = System.Security.Authentication.SslProtocols.Tls12
+
+                ConnectTimeout = 5000,
+                SyncTimeout = 5000
             };
 
+            if (!string.IsNullOrEmpty(config["RedisConfig:Password"]))
+            {
+                options.Password = config["RedisConfig:Password"];
+            }
+
             var redisConnection = ConnectionMultiplexer.Connect(options);
-            IDatabase db = redisConnection.GetDatabase();
-
             services.AddSingleton<IConnectionMultiplexer>(redisConnection);
+            services.AddSingleton<ICacheStrategy, RedisCacheService>();
 
+            return services;
+        }
+
+        public static IServiceCollection AddMemoryCacheStrategy(this IServiceCollection services)
+        {
+            services.AddSingleton<ICacheStrategy, MemoryCacheService>();
             return services;
         }
     }
