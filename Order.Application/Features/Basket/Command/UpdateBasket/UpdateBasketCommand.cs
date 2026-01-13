@@ -13,7 +13,7 @@ namespace Order.Application.Features.Basket.Command.UpdateBasket
     public class UpdateBasketCommand : ICommand<GetBasketQueryResponse>
     {
         public Guid CustomerId { get; set; }
-        public List<BasketItemRequest> Items { get; set; } = new();
+        public List<BasketItemRequest> BasketItems { get; set; } = new();
     }
 
     public class BasketItemRequest

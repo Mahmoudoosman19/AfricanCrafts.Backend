@@ -24,12 +24,17 @@ namespace Order.Application.Features.Basket.Command.UpdateBasket
         }
 
         public async Task<ResponseModel<GetBasketQueryResponse>> Handle(
-            UpdateBasketCommand request,
-            CancellationToken cancellationToken)
+             UpdateBasketCommand request,
+             CancellationToken cancellationToken)
         {
-            var basket = new CustomerBasket(request.CustomerId);
+            var basket = await _basketRepository.GetBasketAsync(request.CustomerId);
 
-            foreach (var item in request.Items)
+            if (basket == null)
+            {
+                basket = new CustomerBasket(request.CustomerId);
+            }
+
+            foreach (var item in request.BasketItems)
             {
                 basket.AddItem(
                     item.ProductId,
@@ -41,7 +46,7 @@ namespace Order.Application.Features.Basket.Command.UpdateBasket
                     item.SelectedColorCode,
                     item.SelectedSizeName);
             }
-            
+
             var result = await _basketRepository.UpdateBasketAsync(basket);
 
             if (result == null)
