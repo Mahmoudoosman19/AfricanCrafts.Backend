@@ -34,9 +34,10 @@ namespace Order.Domain.Entities
             SelectedSizeName = selectedSizeName;
         }
 
-        public void UpdateQuantity(int quantity)
+        public void SetQuantity(int quantity)
         {
-            Quantity += quantity;
+            if (quantity <= 0) throw new ArgumentException("Quantity must be positive");
+            Quantity = quantity;
         }
     }
 }

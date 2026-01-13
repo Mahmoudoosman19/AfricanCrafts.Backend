@@ -1,0 +1,15 @@
+﻿using Common.Application.Abstractions.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Order.Application.Features.Basket.Command.MigrateBasket
+{
+    public class MigrateBasketCommand : ICommand
+    {
+        public Guid AnonymousId { get; set; }
+        public Guid CustomerId { get; set; }
+    }
+}
