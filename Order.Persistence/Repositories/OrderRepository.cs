@@ -3,11 +3,12 @@ using Common.Domain.Specification;
 using Common.Persistence.Specifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Order.Domain.Abstraction;
 using System.Linq.Expressions;
 
 namespace Order.Persistence.Repositories
 {
-    internal class OrderRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    internal class OrderRepository<TEntity> : IOrderRepository<TEntity> where TEntity : class
     {
         private readonly OrderDbContext _context;
         protected DbSet<TEntity> _entity;
