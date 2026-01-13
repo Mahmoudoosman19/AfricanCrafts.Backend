@@ -41,7 +41,10 @@ namespace Order.Persistence.Repositories
 
         public async Task<bool> DeleteBasketAsync(Guid customerId)
         {
-            _cache.Remove($"{BasketKeyPrefix}{customerId}");
+            var key = $"{BasketKeyPrefix}{customerId}";
+            if (!_cache.ContainsKey(key))
+                return false;
+            _cache.Remove(key);
             return true;
         }
     }
