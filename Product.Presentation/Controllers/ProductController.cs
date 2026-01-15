@@ -11,6 +11,7 @@ using Product.Application.Features.Product.Commands.UpdateProduct;
 using Product.Application.Features.Product.Queries.GetProductDetails;
 using Product.Application.Features.Product.Queries.GetProductDetailsCustomer;
 using Product.Application.Features.Product.Queries.GetProducts;
+using Product.Application.Features.Product.Queries.GetProductsBulkWithRelations;
 using Product.Application.Features.Product.Queries.ProductStatisticsQuery;
 
 
@@ -97,13 +98,20 @@ namespace Product.Presentation.Controllers
 
             return HandleResult(result);
         }
-       
-      
+
+
         [HttpGet("product-customer-details")]
         public async Task<IActionResult> ProductDetails([FromQuery] CustomerGetProductDetailsByIdQuery query)
         {
             var respons = await Sender.Send(query);
             return Ok(respons);
+        }
+        
+        [HttpGet("get-products-bulk")]
+        public async Task<IActionResult> GetProductsBulk([FromQuery] List<Guid> ids)
+        {
+            var result = await Sender.Send(new GetProductsBulkWithRelationsQuery { Ids = ids });
+            return Ok(result);
         }
         [HttpGet("get-product-statistics")]
         public async Task<IActionResult> GetProductStatistics([FromQuery] ProductStatisticsQuery query)
