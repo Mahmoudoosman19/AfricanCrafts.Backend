@@ -18,7 +18,7 @@ namespace Order.Presentation
             // layers regestration
             services.AddApplicationStrapping();
             services.AddPersistenceStrapping();
-            services.AddInfrastructureStrapping();
+            services.AddInfrastructureStrapping(configuration);
 
 
             return services;

@@ -32,7 +32,7 @@ namespace Order.Domain.Entities
                                                        && x.SelectedColorCode == colorCode);
 
             if (existingItem != null)
-                existingItem.SetQuantity(quantity);
+                existingItem.AddQuantity(quantity); // increase quantity if product already exist in basket
             else
                 basketItems.Add(new BasketItem(productId, productExtensionId, nameAr, nameEn,
                                           unitPrice, quantity, colorCode, sizeName));

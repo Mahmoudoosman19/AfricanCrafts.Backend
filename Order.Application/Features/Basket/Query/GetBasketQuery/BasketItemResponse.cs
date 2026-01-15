@@ -8,7 +8,6 @@ namespace Order.Application.Features.Basket.Query.GetBasketQuery
 {
     public class BasketItemResponse
     {
-        public Guid BasketId { get; init; }
         public Guid ProductId { get; init; }
         public Guid ProductExtensionId { get; init; }
         public string ProductNameAr { get; init; } = null!;

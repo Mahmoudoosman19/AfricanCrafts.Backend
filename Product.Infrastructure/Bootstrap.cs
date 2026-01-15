@@ -1,7 +1,9 @@
 ﻿using Common.Application.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Product.Application.Abstractions;
 using Product.Infrastructure.Service;
 using Product.Infrastructure.Services;
 using System.Globalization;
@@ -15,7 +17,7 @@ public static class Bootstrap
         services.AddLocalization();
         services.AddSingleton<ITimeService, TimeService>();
 
-
+      
         services.Configure<RequestLocalizationOptions>(options =>
         {
             var supportedCultures = new List<CultureInfo>

@@ -39,5 +39,10 @@ namespace Order.Domain.Entities
             if (quantity <= 0) throw new ArgumentException("Quantity must be positive");
             Quantity = quantity;
         }
+        public void AddQuantity(int quantity)
+        {
+            if (quantity <= 0) throw new ArgumentException("Quantity must be positive");
+            Quantity += quantity;
+        }
     }
 }
