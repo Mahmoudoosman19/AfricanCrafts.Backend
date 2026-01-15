@@ -15,10 +15,9 @@ namespace Product.Application.Features.Product.Commands.RestockProduct
         {
             var product = await _productextensionRepo.GetByIdAsync(request.ProductExtensionId);
             if (request.Increase)
-
                 product.SetAmount(product.Amount + request.Amount);
             else
-            product.SetAmount(product.Amount - request.Amount);
+                product.SetAmount(product.Amount - request.Amount);
             await _productextensionRepo.SaveChangesAsync();
             return ResponseModel.Success(Messages.SuccessfulOperation);
 

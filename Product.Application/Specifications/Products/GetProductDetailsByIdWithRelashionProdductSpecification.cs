@@ -17,7 +17,7 @@ namespace Product.Application.Specifications.Products
                 $"{nameof(Domain.Entities.Product.Extensions)}.{nameof(ProductExtension.Size)}",
             });
 
-            EnableSplitQuery();
+            //EnableSplitQuery();
         }
     }
 }

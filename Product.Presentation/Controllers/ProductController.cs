@@ -31,7 +31,7 @@ namespace Product.Presentation.Controllers
         }
 
         [HttpPost("supervisor-add-product")]
-        public async Task<IActionResult> SuperVisorAdd([FromForm] SuperVisorAddProductCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> SuperVisorAdd([FromForm] SupervisorAddProductCommand command, CancellationToken cancellationToken)
         {
             var result = await Sender.Send(command, cancellationToken);
             return HandleResult(result);
