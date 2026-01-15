@@ -2,7 +2,7 @@
 using ImageKitFileManager.Abstractions;
 using Mapster;
 using Product.Application.Features.Product.Commands.AddProduct;
-using Product.Application.Features.Product.Commands.AddProduct.DTOs;
+//using Product.Application.Features.Product.Commands.AddProduct.DTOs;
 using Product.Application.Features.Product.Commands.SuperVisorAddProduct;
 using Product.Domain.Entities;
 
@@ -13,52 +13,36 @@ namespace Product.Application.Features.Product.MappingConfig
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<AddProductCommand, Domain.Entities.Product>()
-                .AfterMapping(MapLists);
+                .ConstructUsing(src => new Domain.Entities.Product())
+                .AfterMapping((src, dest) =>
+                {
+                    dest.SetName(src.NameAr, src.NameEn);
+                    dest.SetDescription(src.DescriptionAr, src.DescriptionEn);
+                    dest.SetPrice((decimal)src.Price);
+                    dest.SetCategory(src.CategoryId);
 
-            config.NewConfig<SuperVisorAddProductCommand, Domain.Entities.Product>()
-                .AfterMapping(MapListsSupervisor);
+                    // تعيين كود المنتج إذا كان قادماً في الـ Command
+                    if (!string.IsNullOrEmpty(src.ProductCode))
+                        dest.SetCode(src.ProductCode);
 
-            config.NewConfig<AddProductImageDTO, ProductImage>()
-                .AfterMapping(MapFile);
+                    // تعيين اسم المجلد
+                    dest.SetImagesFolderName(Guid.NewGuid());
 
-            config.NewConfig<AddProductExtensionDTO, ProductExtension>();
-        }
+                    // تحويل الـ Extensions (بيانات بسيطة)
+                    if (src.Extensions != null)
+                    {
+                        foreach (var ext in src.Extensions)
+                        {
+                            var productExt = new ProductExtension();
+                            productExt.SetSize(ext.SizeId ?? Guid.Empty);
+                            productExt.SetColor(ext.ColorCode);
+                            productExt.SetAmount(ext.Amount);
+                            productExt.SetFees((decimal)(ext.Fees));
+                            dest.AddExtension(productExt);
+                        }
+                    }
 
-        private void MapLists(AddProductCommand dest, Domain.Entities.Product src)
-        {
-            src.SetImagesFolderName(Guid.NewGuid());
-            MapContext.Current!.Parameters[ProductMappingConfigParametersKeys.FolderId] = src.ImagesFolderName;
-
-            var extensions = dest.Extensions.Adapt<List<ProductExtension>>();
-            var images = dest.Images.Adapt<List<ProductImage>>();
-
-            src.AddRangeExtension(extensions);
-            src.AddRangeImage(images);
-        }
-
-        private void MapListsSupervisor(SuperVisorAddProductCommand dest, Domain.Entities.Product src)
-        {
-            src.SetImagesFolderName(Guid.NewGuid());
-            MapContext.Current!.Parameters[ProductMappingConfigParametersKeys.FolderId] = src.ImagesFolderName;
-
-            var extensions = dest.Extensions.Adapt<List<ProductExtension>>();
-            var images = dest.Images.Adapt<List<ProductImage>>();
-
-            src.AddRangeExtension(extensions);
-            src.AddRangeImage(images);
-        }
-
-        private Guid GetCurrentUserId()
-        {
-            var currentUser = MapContext.Current!.GetService<ITokenExtractor>();
-            return currentUser.GetUserId();
-        }
-
-        private void MapFile(AddProductImageDTO dest, ProductImage src)
-        {
-            IImageKitService imageKitService = MapContext.Current!.GetService<IImageKitService>();
-            Guid folderId = (Guid)MapContext.Current!.Parameters[ProductMappingConfigParametersKeys.FolderId];
-            src.SetImage(imageKitService, dest.ImageFile, folderId);
+                });
         }
     }
 }

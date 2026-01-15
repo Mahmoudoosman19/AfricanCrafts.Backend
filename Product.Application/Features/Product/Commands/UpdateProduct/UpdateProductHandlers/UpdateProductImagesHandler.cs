@@ -1,6 +1,10 @@
 ﻿using Common.Application.Extensions.Mapster;
 using Product.Application.Abstractions;
+using Product.Application.Features.Product.Commands.AddProduct;
 using Product.Application.Features.Product.Commands.AddProduct.DTOs;
+
+
+//using Product.Application.Features.Product.Commands.AddProduct.DTOs;
 using Product.Application.Features.Product.Commands.UpdateProduct.DTOs;
 using Product.Application.Features.Product.MappingConfig;
 using Product.Application.Specifications.Products;

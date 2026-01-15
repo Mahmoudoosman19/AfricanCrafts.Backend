@@ -2,10 +2,9 @@
 {
     public sealed record AddProductExtensionDTO
     {
-        public Guid SizeId { get; init; }
+        public Guid? SizeId { get; init; }
         public string ColorCode { get; init; } = null!;
         public int Amount { get; init; }
-        public decimal? Fees { get; init; }
-        public bool IsDeleted { get; init; }
+        public decimal Fees { get; init; }
     }
 }

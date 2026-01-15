@@ -10,6 +10,6 @@ namespace Product.Application.Features.Product.Queries.GetProductDetailsCustomer
         public decimal DiscountPrice { get; init; }
         public double Rate { get; set; }
         public string? ProductCode { get; init; }
-        public List<DetailedProductImageResponse> Images { get; init; } = new();
+        public List<ProductImageResponse> Images { get; init; } = new();
     }
 }

@@ -22,7 +22,7 @@ namespace Product.Application.Features.Product.Queries.GetProductDetails
             var product = _productRepo.GetEntityWithSpec(new GetProductDetailsByIdWithRelationsProductSpecification(request));
 
             var response = _mapper.Map<ProductDetailsQueryResponse>(product!);
-           
+            
 
             return Task.FromResult(ResponseModel.Success(response, 1));
         }

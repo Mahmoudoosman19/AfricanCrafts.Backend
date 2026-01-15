@@ -3,7 +3,7 @@ using Product.Application.Features.Product.Commands.AddProduct.DTOs;
 
 namespace Product.Application.Features.Product.Commands.SuperVisorAddProduct;
 
-public class SuperVisorAddProductCommand : ICommand<string>
+public class SupervisorAddProductCommand : ICommand<string>
 {
    
     [DisplayName("الاسم العربي")]
@@ -20,7 +20,7 @@ public class SuperVisorAddProductCommand : ICommand<string>
     public double Price { get; init; }
     [DisplayName("الفئة")]
     public Guid CategoryId { get; init; }
-    public Guid? PointsId { get; init; }
+    //public Guid? PointsId { get; init; }
     [DisplayName("الصور")]
     public List<AddProductImageDTO> Images { get; init; } = [];
     [DisplayName("الاحجام")]

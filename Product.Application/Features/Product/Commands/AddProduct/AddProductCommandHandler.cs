@@ -2,77 +2,61 @@
 using Bus.Contracts.Models.Notifications;
 using Common.Application.Localization;
 using IdentityHelper.Abstraction;
+using ImageKitFileManager.Abstractions;
 using Product.Domain.Abstraction;
+using Product.Domain.Entities;
 using System.Text;
 
 namespace Product.Application.Features.Product.Commands.AddProduct;
 
-internal class AddProductCommandHandler : ICommandHandler<AddProductCommand, string>
+internal class AddProductCommandHandler : ICommandHandler<AddProductCommand>
 {
     private readonly IMapper _mapper;
     private readonly IProductUnitOfWork _unitOfWork;
-    private readonly ILocalizer _localizer;
-    private readonly ITokenExtractor _tokenExtractor;  
+    private readonly IImageKitService _imageKitService; 
 
-
-    public AddProductCommandHandler(IMapper mapper, IProductUnitOfWork unitOfWork, ILocalizer localizer, ITokenExtractor tokenExtractor)
+    public AddProductCommandHandler(
+        IMapper mapper,
+        IProductUnitOfWork unitOfWork,
+        IImageKitService imageKitService)
     {
         _mapper = mapper;
         _unitOfWork = unitOfWork;
-        _localizer = localizer;
-        _tokenExtractor = tokenExtractor;
+        _imageKitService = imageKitService;
     }
 
-    public async Task<ResponseModel<string>> Handle(AddProductCommand request, CancellationToken cancellationToken)
+    public async Task<ResponseModel> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
-        var userId = _tokenExtractor.GetUserId();  
-        var currentLang = _localizer.GetLanguage() ?? "en";
-        if (request.ProductCode == null)
+        if (string.IsNullOrEmpty(request.ProductCode))
             request.ProductCode = GenerateProductCode();
-        else
-            request.ProductCode = request.ProductCode;
-
-        var product = _mapper.Map<AddProductCommand, Domain.Entities.Product>(request);
-        await _unitOfWork.Repository<Domain.Entities.Product>().AddAsync(product, cancellationToken);
-        await _unitOfWork.CompleteAsync(cancellationToken);
-        List<string> roles = new List<string>
+        var product = _mapper.Map<Domain.Entities.Product>(request);
+        if (request.Images != null && request.Images.Any())
         {
-          "Admin",
-          "Supervisor"
-        };
-        List<string> replaceValue = new List<string>
-        {
-            product.NameAr,
-            product.NameEn,
-        };
-        var stringLang = currentLang.Substring(0, 2);
-        
-        if (Enum.TryParse(stringLang, true, out LanguageEnum language))
-        {
-            var notificationsModel = new NotificationsModel
+            foreach (var imgDto in request.Images)
             {
-                Message = MessageEnumKey.AddProduct,
-                Language = language,
-                UserId = userId,
-                Roles = roles,
-                ReplaceValue = replaceValue 
-            };
-            //product.CreateNotification(notificationsModel);
+                if (imgDto.ImageFile != null)
+                {
+                    var newImage = new ProductImage();
+
+                    newImage.SetColor(imgDto.ColorCode);
+
+                    newImage.SetImage(_imageKitService, imgDto.ImageFile, product.ImagesFolderName);
+
+                    product.AddImage(newImage);
+                }
+            }
         }
 
-        return ResponseModel.Success(Messages.SuccessfulOperation);
+        await _unitOfWork.Repository<Domain.Entities.Product>().AddAsync(product, cancellationToken);
+        var result = await _unitOfWork.CompleteAsync(cancellationToken);
+
+        return result > 0
+            ? ResponseModel.Success(Messages.SuccessfulOperation)
+            : ResponseModel.Failure("حدث خطأ أثناء حفظ المنتج");
     }
-    public static string GenerateProductCode()
+
+    private string GenerateProductCode()
     {
-        var length = 8;
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder randomCode = new StringBuilder();
-
-        Random random = new Random();
-        for (int i = 0; i < length; i++)
-            randomCode.Append(chars[random.Next(chars.Length)]);
-
-        return randomCode.ToString();
+        return "PRD-" + Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
     }
- 
 }

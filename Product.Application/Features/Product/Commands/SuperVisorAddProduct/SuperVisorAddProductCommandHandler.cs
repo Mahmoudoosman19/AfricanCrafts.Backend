@@ -1,4 +1,5 @@
 ﻿using IdentityHelper.Abstraction;
+using ImageKitFileManager.Abstractions;
 using Product.Application.Features.Product.Commands.SuperVisorAddProduct;
 using Product.Domain.Abstraction;
 using Product.Domain.Enums;
@@ -6,31 +7,45 @@ using System.Text;
 
 namespace Product.Application.Features.Product.Commands.AddProduct
 {
-    internal class SuperVisorAddProductCommandHandler : ICommandHandler<SuperVisorAddProductCommand, string>
+    internal class SupervisorAddProductCommandHandler : ICommandHandler<SupervisorAddProductCommand, string>
     {
         private readonly IMapper _mapper;
         private readonly IProductUnitOfWork _unitOfWork;
         private readonly ITokenExtractor _userManager;
+        private readonly IImageKitService _imageKitService;
 
-        public SuperVisorAddProductCommandHandler(IMapper mapper, IProductUnitOfWork unitOfWork, ITokenExtractor userManager)
+        public SupervisorAddProductCommandHandler(IMapper mapper, IProductUnitOfWork unitOfWork, ITokenExtractor userManager,
+            IImageKitService imageKitService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _imageKitService = imageKitService;
         }
 
-        public async Task<ResponseModel<string>> Handle(SuperVisorAddProductCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel<string>> Handle(SupervisorAddProductCommand request, CancellationToken cancellationToken)
         {
-            if (request.ProductCode == null)
+            if (string.IsNullOrEmpty(request.ProductCode))
+            {
                 request.ProductCode = GenerateProductCode();
-            else
-                request.ProductCode = request.ProductCode;
-            var product = _mapper.Map<SuperVisorAddProductCommand, Domain.Entities.Product>(request);
+            }
 
-            product.SetStatus(ProductStatus.Approved);
+            var product = _mapper.Map<Domain.Entities.Product>(request);
+
+            foreach (var imgDto in request.Images)
+            {
+                var entityImage = product.Images.FirstOrDefault(x => x.ColorCode == imgDto.ColorCode);
+                if (entityImage != null && imgDto.ImageFile != null)
+                {
+                    entityImage.SetImage(_imageKitService, imgDto.ImageFile, product.ImagesFolderName);
+                }
+            }
 
             await _unitOfWork.Repository<Domain.Entities.Product>().AddAsync(product, cancellationToken);
-            await _unitOfWork.CompleteAsync(cancellationToken);
+            var result = await _unitOfWork.CompleteAsync(cancellationToken);
+
+            if (result <= 0)
+                return ResponseModel.Failure<string>("حدث خطأ أثناء حفظ المنتج");
 
             return ResponseModel.Success(Messages.SuccessfulOperation);
         }
