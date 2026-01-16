@@ -9,6 +9,7 @@ namespace Order.Application.Features.Basket.Query.GetBasketQuery
 {
     public class GetBasketQueryResponse
     {
+       //public Guid Id { get; set; }
         public Guid? CustomerId { get; init; }
         public List<BasketItemResponse> basketItems { get; init; }
         public DateTime CreatedOnUtc { get; init; }

@@ -10,6 +10,5 @@ namespace Order.Application.Features.Basket.Command.MigrateBasket
     public class MigrateBasketCommand : ICommand
     {
         public Guid AnonymousId { get; set; }
-        public Guid CustomerId { get; set; }
     }
 }

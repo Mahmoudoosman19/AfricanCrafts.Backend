@@ -17,7 +17,11 @@ namespace Order.Domain.Entities
         public List<BasketItem> basketItems { get; private set; } = new();
 
 
-        public CustomerBasket(Guid customerId) => CustomerId = customerId;
+        public CustomerBasket(Guid customerId)
+        {
+            CustomerId = customerId;
+            CreatedOnUtc = DateTime.UtcNow;
+        }
 
         public DateTime CreatedOnUtc { get; set; }
         public DateTime? ModifiedOnUtc { get; set; }
