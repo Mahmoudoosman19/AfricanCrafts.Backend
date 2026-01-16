@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Order.Application.Features.Basket.MappingConfig
 {
-    ////internal class GetBasketMappingConfig : IRegister
-    //{
-    //    //public void Register(TypeAdapterConfig config)
-    //    //{
-    //    //    config.NewConfig<CustomerBasket, GetBasketQueryResponse>()
-    //    //        .Map(dest => dest.basketItems, src => src.basketItems);
-    //    //}
-    //}
+    internal class GetBasketMappingConfig : IRegister
+    {
+        public void Register(TypeAdapterConfig config)
+        {
+            //config.NewConfig<CustomerBasket, GetBasketQueryResponse>()
+            //    .Map(dest => dest.CustomerId, src => src.Id);
+        }
+    }
 }
